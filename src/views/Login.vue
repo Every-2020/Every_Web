@@ -18,7 +18,7 @@
             <input class="login_item_content_form_input" type="password" v-model="pw" required/>
             <div class="login_item_content_form_placeholder">비밀번호</div>
             <div @click="showPw(1, 0)" class="login_item_content_form_eye">
-              <i class="fas fa-eye"></i>
+              <i class="fas fa-eye-slash"></i>
             </div>
           </div>
           <div class="login_item_content_forgot"><span>비밀번호를 잊으셨나요?</span></div>
@@ -52,11 +52,11 @@ export default {
     showPw (input, i) {
       document.getElementsByClassName('login_item_content_form')[input].classList.toggle('active')
       if (document.getElementsByClassName('login_item_content_form')[input].classList.contains('active')) {
-        document.getElementsByTagName('i')[i].classList.replace('fa-eye', 'fa-eye-slash')
+        document.getElementsByTagName('i')[i].classList.replace('fa-eye-slash', 'fa-eye')
         document.getElementsByTagName('input')[input].setAttribute('type', 'text')
       } else {
-        document.getElementsByTagName('i')[i].classList.replace('fa-eye-slash', 'fa-eye')
         document.getElementsByTagName('input')[input].setAttribute('type', 'password')
+        document.getElementsByTagName('i')[i].classList.replace('fa-eye', 'fa-eye-slash')
       }
     }
   },
