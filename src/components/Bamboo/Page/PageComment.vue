@@ -1,17 +1,5 @@
 <template>
   <div class="comment">
-    <div class="comment_popup" v-if="editing">
-      <div @click="onBack" class="comment_popup_area"></div>
-      <div class="comment_popup_box">
-        <div class="comment_popup_box_header">
-          <img @click="onBack" src="../../../assets/back.png" alt="back" class="comment_popup_box_header_back">
-          <img src="../../../assets/bamboo/profile.png" alt="profile" class="comment_popup_box_header_profile">
-          <span>{{ edit_name }}</span>
-        </div>
-        <textarea maxlength="250" class="comment_edit" v-model="edit"></textarea>
-        <button @click="onEdit">수정</button>
-      </div>
-    </div>
     <div class="comment_area" v-if="loading">
       <div class="comment_area_content">
         <img class="comment_profile load_profile" src="../../../assets/bamboo/profile.png" alt="profile">
@@ -41,8 +29,21 @@
             <span class="comment_area_box_content_text">{{ comment.content }}</span>
           </div>
         </div>
-        <div @click="onClick(comment.idx, comment.content, comment['user'])" class="comment_area_more" v-if="comment.student_idx === my_idx">
-          <img src="../../../assets/bamboo/more.png" alt="more">
+        <div class="comment_area_more" v-if="comment.student_idx === my_idx">
+          <img class="comment_area_more_img" @click="onClick(comment)" src="../../../assets/bamboo/more.png" alt="more">
+          <div class="comment_more" v-if="comment.edit">
+            <div @click="onClose(comment)" class="comment_more_area"></div>
+            <div class="comment_more_box">
+              <div @click="openEdit(comment)" class="comment_more_box_edit">
+                <img src="../../../assets/bamboo/edit.png" alt="edit">
+                <span>댓글 수정하기</span>
+              </div>
+              <div @click="onDelete(comment)" class="comment_more_box_delete">
+                <img src="../../../assets/bamboo/delete.png" alt="delete">
+                <span>댓글 삭제하기</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="comment_area_exp">
@@ -52,10 +53,12 @@
     <div class="comment_none" v-if="!comments.length && this.loading === false">
       <span>댓글이 없습니다.</span>
     </div>
+    <comment-edit @onEdit="onEdit" @onBack="onBack" :edit="edit" :name="edit_name" v-if="editing"></comment-edit>
   </div>
 </template>
 
 <script>
+import CommentEdit from '@/components/Bamboo/Page/PageEditComment'
 import axios from 'axios'
 import server from '@/models/server'
 export default {
@@ -67,7 +70,8 @@ export default {
       edit: '',
       editing: false,
       edit_idx: '',
-      edit_name: ''
+      edit_name: '',
+      more: []
     }
   },
   props: ['idx', 'refresh'],
@@ -83,13 +87,16 @@ export default {
       .then(response => {
         if (response.data.status === 200) {
           this.comments = response.data.data.replies
-          for(let comment of response.data.data.replies) {
+          for(let comment of this.comments) {
             this.getUser(comment, comment.student_idx)
           }
           this.loading = false
         }
       })
     }
+  },
+  components: {
+    CommentEdit
   },
   mounted() {
     axios.get(`${this.url}/bamboo/reply?post=${this.idx}`)
@@ -99,29 +106,65 @@ export default {
         for(let comment of response.data.data.replies) {
           this.getUser(comment, comment.student_idx)
         }
-        setTimeout(() => {
-          this.loading = false 
-        }, 300);
+        this.loading = false 
       }
     })
   },
   methods: {
+    onDelete (comment) {
+      comment.edit = false
+      this.$swal
+      .fire({
+        title: '경고',
+        text: '정말로 삭제하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonText: '삭제하기',
+        cancelButtonText: '취소',
+        icon: 'warning',
+        })
+        .then((result) => {
+          if (result.value) {
+            axios.delete(`${this.url}/bamboo/reply/${comment.idx}`)
+            .then(response => {
+              if (response.data.status === 200) {
+                this.$swal.fire(
+                  '완료!',
+                  '댓글을 성공적으로 삭제하였습니다.',
+                  'success'
+                )
+                this.$emit('onRefresh')
+              }
+            })
+            .catch(() => {
+              this.$swal.fire(
+                  '오류',
+                  '댓글을 삭제하지 못했습니다.',
+                  'error'
+                )
+            })
+          }
+        })
+    },
+    openEdit (comment) {
+      comment.edit = false
+      this.editing = true
+    },
+    onClose (comment) {
+      comment.edit = false
+    },
     onBack () {
       this.editing = false
     },
-    onClick (idx, content, name) {
-      this.edit_idx = idx
-      this.editing = true
-      this.edit = content
-      this.edit_name = name
-      setTimeout(() => {
-        document.getElementsByClassName('comment_edit')[0].focus()
-      }, 10);
+    onClick (comment) {
+      comment['edit'] = true
+      this.edit_idx = comment.idx
+      this.edit = comment.content
+      this.edit_name = comment.user
     },
-    onEdit () {
-      if (this.edit) {
+    onEdit (edit) {
+      if (edit) {
         axios.put(`${this.url}/bamboo/reply/${this.edit_idx}`, {
-          content: this.edit
+          content: edit
         })
         .then(() => {
           this.editing = false
@@ -138,6 +181,7 @@ export default {
       axios.get(`${this.url}/member/student/${idx}`)
       .then(response => {
         if (response.data.status === 200) {
+          this.$set(comment, 'edit', false)
           this.$set(comment, 'user', response.data.data.member.name)
         }
       })
@@ -165,80 +209,63 @@ export default {
 </script>
 
 <style lang="scss">
-.comment_popup {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
+.comment_more {
   &_area {
     position: fixed;
     width: 100%;
     height: 100%;
+    z-index: 100;
     top: 0;
     left: 0;
   }
   &_box {
-    width: 90%;
-    height: 400px;
-    max-width: 590px;
-    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.123);
-    background: white;
+    position: absolute;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     -ms-flex-direction: column;
-    padding: 10px;
-    z-index: 1000;
-    &_header {
-      padding: 10px;
-      text-align: left;
+    padding: 8px;
+    z-index: 200;
+    border-radius: 5px;
+    background-color: #F8F8F8;
+    right: 10px;
+    top: 15px;
+    &_edit {
       display: flex;
       display: -webkit-flex;
+      justify-content: center;
       align-items: center;
-      &_back {
-        width: 35px;
-        height: 35px;
-        cursor: pointer;
-      }
-      &_profile {
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 60px;
-        height: 60px;
+      cursor: pointer;
+      img {
+        width: 22px;
+        height: 22px;
       }
       span {
-        font-size: 20px;
-        font-weight: 800;
+        margin-left: 5px;
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(0, 0, 0, 0.50);
       }
     }
-    textarea {
-      width: 100%;
-      height: calc(100% - 100px);
-      border: none;
-      resize: none;
-      padding: 0px 10px 10px 10px;
-      font-family: 'NanumSquare', sans-serif;
-      font-size: 18px;
-      &:focus {
-        outline: none;
-      }
-    }
-    button {
-      background: #7E40FF;
-      border: none;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      width: 100%;
+    &_delete {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 8px;
+      border-top: #D4D4D4 1px solid;
+      padding-top: 8px;
       cursor: pointer;
-      height: 38px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      span {
+        margin-left: 5px;
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(0, 0, 0, 0.50);
+      }
     }
   }
 }
@@ -320,7 +347,7 @@ export default {
   &_area {
     display: flex;
     display: -webkit-flex;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: relative;
     flex-direction: column;
     -ms-flex-direction: column;
@@ -394,12 +421,13 @@ export default {
       display: -webkit-flex;
       justify-content: center;
       align-items: center;
-      img {
+      &_img {
         width: 15px;
         height: 15px;
         opacity: 0.4;
         filter: alpha(opacity=40);
         cursor: pointer;
+        position: relative;
       }
     }
   }
