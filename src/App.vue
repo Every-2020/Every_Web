@@ -23,9 +23,9 @@ export default {
     // if (this.$cookie.get('access')) {
     //   console.log(this.$cookie.get('access'));
       axios.defaults.headers.common['token'] = this.$cookie.get('access')
-    //   this.$router.push({ name: 'bambooPost' })
+    //   this.$router.push({ name: 'bamboo' })
     // } else {
-    //   this.$router.push({ name: 'login' })
+      // this.$router.push({ name: 'login' })
     // }
     //Scroll Cookie Delete
     this.$cookie.delete('bamboo')

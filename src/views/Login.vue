@@ -65,13 +65,11 @@ export default {
           this.$cookie.delete('access')
           this.$cookie.set('access', response.data.data['x-access-token'], { expires: '12h' })
           axios.defaults.headers.common['token'] = response.data.data['x-access-token']
-          if (this.$store.state.identity === "student") this.$router.push({ name: 'bambooPost' })
+          if (this.$store.state.identity === "student") this.$router.push({ name: 'bamboo' })
         }
       })
-      .catch( error => {
-        if (error.response.status === 401 || error.response.status === 400) {
-          this.$swal('오류','이메일 또는 비밀번호가 올바르지 않습니다.','error')
-        }
+      .catch(() => {
+        this.$swal('오류','이메일 또는 비밀번호가 올바르지 않습니다.','error')
       })
     },
     onClick () {

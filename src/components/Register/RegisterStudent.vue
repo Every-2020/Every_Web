@@ -72,7 +72,6 @@ export default {
       this.school_input = ''
       this.show = false
       this.idx = 1
-
     },
     onSubmit () {
       axios.get(`${this.url}/school?query=${this.school_input}`)
@@ -83,9 +82,8 @@ export default {
           this.idx = 2
         }
       })
-      .catch( error => {
+      .catch(() => {
         this.idx = 2
-        console.log(error)
       })
     },
     onSelect (index) {

@@ -1,23 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Main from '@/views/Main.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/main',
-    name: 'main',
-    component: Main,
+    path: '/login',
+    name: 'login',
+    component: () => import(/* */'@/views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import(/* */'@/views/Register.vue')
+  },
+  {
+    path: '/',
+    name: 'student',
+    component: () => import(/* */'@/views/Student.vue'),
     children: [
       {
-        name: 'bamboo',
+        name: '',
         path: 'bamboo',
         component: () => import(/* */'@/views/Bamboo.vue'),
         children: [
           {
-            name: 'bambooPost',
-            path: 'posts',
+            name: 'bamboo',
+            path: '',
             component: () => import(/* */'@/components/Bamboo/BambooPost.vue')
           },
           {
@@ -30,16 +39,6 @@ const routes = [
       },
     ]
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* */'@/views/Login.vue')
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import(/* */'@/views/Register.vue')
-  }
 ]
 
 const router = new VueRouter({

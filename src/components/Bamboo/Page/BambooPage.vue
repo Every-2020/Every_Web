@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     close () {
-      this.$router.push({name: 'bambooPost'})
+      this.$router.push({name: 'bamboo'})
     },
     postTimeCalc (time) {
       const created = new Date(time)
