@@ -109,6 +109,8 @@ export default {
         .then( response => {
           if (response.status === 200) {
             this.posts = response.data.data.posts
+            this.$cookie.delete('bamboo')
+            window.scrollTo(0, 0)
           }
         })
         .catch( error => {
@@ -163,6 +165,11 @@ export default {
     flex-direction: column;
     max-width: 600px;
     -ms-flex-direction: column;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   background-color: rgb(252, 252, 252);
   width: 100%;
