@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+const VueCookie = require('vue-cookie')
 
 Vue.use(VueRouter)
 
@@ -16,13 +17,25 @@ const routes = [
   },
   {
     path: '/',
-    name: 'student',
-    component: () => import(/* */'@/views/Student.vue'),
+    name: '',
+    component: () => import(/* */'@/views/Student/Student.vue'),
+    beforeEnter: (to, from, next) => {
+      if(VueCookie.get('access')) {
+        return next();
+      } else {
+        return next('/login');
+      }
+    },
     children: [
+      {
+        name: 'student',
+        path: '',
+        component: () => import(/* */'@/views/Student/Home.vue'),
+      },
       {
         name: '',
         path: 'bamboo',
-        component: () => import(/* */'@/views/Bamboo.vue'),
+        component: () => import(/* */'@/views/Student/Bamboo.vue'),
         children: [
           {
             name: 'bamboo',

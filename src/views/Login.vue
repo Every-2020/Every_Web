@@ -65,7 +65,7 @@ export default {
           this.$cookie.delete('access')
           this.$cookie.set('access', response.data.data['x-access-token'], { expires: '12h' })
           axios.defaults.headers.common['token'] = response.data.data['x-access-token']
-          if (this.$store.state.identity === "student") this.$router.push({ name: 'bamboo' })
+          if (this.$store.state.identity === "student") this.$router.push({ name: 'student' })
         }
       })
       .catch(() => {
