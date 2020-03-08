@@ -1,6 +1,7 @@
 <template>
   <div class="post_area">
-    <div class="post" v-for="(post, index) in posts" :key="index">
+    <bamboo-load v-if="load"></bamboo-load>
+    <div v-else class="post" v-for="(post, index) in posts" :key="index">
       <div class="post_content">
         <bamboo-header :created="post.created_at" :time="postTimeCalc(post.created_at)" :idx="post.idx"></bamboo-header>
         <div :class="{'post_content_main' : true, 'post_content_main_hidden' : postHide(post.content)}">
@@ -22,6 +23,7 @@
 <script>
 import server from '@/models/server'
 import axios from 'axios'
+import BambooLoad from '@/components/Bamboo/BambooLoad.vue'
 import BambooFooter from '@/components/Bamboo/BambooFooter.vue'
 import BambooHeader from '@/components/Bamboo/BambooHeader.vue'
 import BambooAdd from '@/components/Bamboo/BambooAdd.vue'
@@ -32,7 +34,8 @@ export default {
       posts: {},
       show: false,
       index: 0,
-      add: false
+      add: false,
+      load: true
     }
   },
   mounted () {
@@ -40,6 +43,7 @@ export default {
     .then( response => {
       if (response.status === 200) {
         this.posts = response.data.data.posts
+        this.load = false
       }
     })
     .catch( error => {
@@ -52,7 +56,8 @@ export default {
   components: {
     BambooHeader,
     BambooFooter,
-    BambooAdd
+    BambooAdd,
+    BambooLoad
   },
   methods: {
     postTimeCalc (time) {
@@ -188,7 +193,6 @@ export default {
     flex-direction: column;
     -ms-flex-direction: column;
     flex-grow: 1;
-    width: 100%;
     &_main {
       text-align: left;
       margin: 10px 0;

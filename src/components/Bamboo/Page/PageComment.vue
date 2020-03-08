@@ -2,15 +2,12 @@
   <div class="comment">
     <div class="comment_area" v-if="loading">
       <div class="comment_area_content">
-        <img class="comment_profile load_profile" src="../../../assets/bamboo/profile.png" alt="profile">
-        <div class="comment_area_box load_box">
-          <div class="comment_area_box_content load_content">
-            <div class="comment_load_title">
-              <div class="comment_load_bar"></div>
-            </div>
-            <div class="comment_load_content">
-              <div class="comment_load_bar"></div>
-            </div>
+        <div class="comment_profile comment_load_profile loading"></div>
+        <div class="comment_area_box comment_load_box">
+          <div class="comment_area_box_content">
+            <div class="comment_load_title loading"></div>
+            <div class="comment_load_first loading"></div>
+            <div class="comment_load_second loading"></div>
           </div>
         </div>
       </div>
@@ -209,6 +206,14 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/animation.scss";
+
+.loading {
+  animation: loading 2s infinite ease-in-out;
+  -webkit-animation: loading 2s infinite ease-in-out;
+  -o-animation: loading 2s infinite ease-in-out;
+  -moz-animation: loading 2s infinite ease-in-out;
+}
 .comment_more {
   &_area {
     position: fixed;
@@ -269,20 +274,6 @@ export default {
     }
   }
 }
-@keyframes fadeIn {
-  0% {
-    left: -100px;
-  }
-  100% {
-    left: 300px;
-  }
-}
-.load {
-  &_profile {
-  }
-  &_content {
-  }
-}
 .comment {
   flex-grow: 1;
   display: flex;
@@ -305,40 +296,29 @@ export default {
     margin-top: 3px;
   }
   &_load {
-    &_bar {
-      width: 10px;
-      height: 100%;
-      top: 0;
-      left: -100px;
-      position: absolute;
-      transform: skew(-20deg);
-      -o-transform: skew(-20deg);
-      -ms-transform: skew(-20deg);
-      -moz-transform: skew(-20deg);
-      -webkit-transform: skew(-20deg);
-      animation: fadeIn 2s .3s infinite cubic-bezier(.14, .75, .2, 1.01) forwards;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.69) 0%,rgba(255,255,255,0) 87%);
-      background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,0.69) 0%, rgba(255,255,255,0) 87%);
-      background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,0.69)), color-stop(87%,rgba(255,255,255,0)));
-      background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0.69) 0%,rgba(255,255,255,0) 87%);
-      background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,0.69) 0%,rgba(255,255,255,0) 87%);
-      background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,0.69) 0%,rgba(255,255,255,0) 87%);
-    }
     &_title {
       width: 50px;
       background: rgb(216, 216, 216);
       border-radius: 10px;
-      height: 19px;
-      position: relative;
-      overflow: hidden;
+      height: 13px;
     }
-    &_content {
+    &_first {
       margin-top: 10px;
-      width: 130px;
+      width: 170px;
       background: rgb(223, 223, 223);
       border-radius: 10px;
-      height: 19px;
-      position: relative;
+      height: 13px;
+    }
+    &_second {
+      margin-top: 10px;
+      width: 120px;
+      background: rgb(223, 223, 223);
+      border-radius: 10px;
+      height: 13px;
+      margin-bottom: 40px;
+    }
+    &_profile {
+      border-radius: 50%;
     }
   }
   &::-webkit-scrollbar {

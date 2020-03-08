@@ -1,0 +1,44 @@
+@keyframes loading {
+  0% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+  50% {
+    background-color: rgba(165, 165, 165, .3);
+  }
+  100% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+}
+@-o-keyframes loading {
+  0% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+  50% {
+    background-color: rgba(165, 165, 165, .3);
+  }
+  100% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+  50% {
+    background-color: rgba(165, 165, 165, .3);
+  }
+  100% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+  50% {
+    background-color: rgba(165, 165, 165, .3);
+  }
+  100% {
+    background-color: rgba(165, 165, 165, .1);
+  }
+}
