@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <img class="home_wave" src="../../assets/student/home/wave.png" alt="wave">
+    <img class="home_wave" src="../../../assets/student/home/wave.png" alt="wave">
     <div class="home_left">
       <div class="home_left_profile">
-        <img class="home_left_profile_img" src="../../assets/student/home/profile.png" alt="profile">
+        <img class="home_left_profile_img" src="../../../assets/student/home/profile.png" alt="profile">
         <div class="home_left_profile_text">
           <span class="home_left_profile_text_title">환영합니다!</span>
           <span class="home_left_profile_text_name">{{ name }}</span>
@@ -12,7 +12,7 @@
       <div class="home_left_schedule">
         <span class="home_left_schedule_title">오늘의 일정</span>
         <div class="home_left_schedule_calendar">
-          <img class="home_left_schedule_calendar_img" src="../../assets/student/home/calendar.png" alt="calendar">
+          <img class="home_left_schedule_calendar_img" src="../../../assets/student/home/calendar.png" alt="calendar">
           <span>{{ today }}</span>
         </div>
         <span class="home_left_schedule_today" v-if="schedule === 0">오늘은 일정이 없습니다.</span>
@@ -20,8 +20,8 @@
       </div>
       <div class="home_left_bamboo">
         <span>오늘의 대나무숲 인기 게시글을<br><b>확인하세요!</b></span>
-        <img class="home_left_bamboo_img" src="../../assets/student/home/bamboo.png" alt="bamboo">
-        <img class="home_left_bamboo_next" src="../../assets/student/home/next.png" alt="next">
+        <img class="home_left_bamboo_img" src="../../../assets/student/home/bamboo.png" alt="bamboo">
+        <img class="home_left_bamboo_next" src="../../../assets/student/home/next.png" alt="next">
       </div>
     </div>
     <meals></meals>
@@ -51,6 +51,9 @@ export default {
     }
   },
   mounted() {
+    document.getElementsByClassName('router_home')[0].classList.add('active_home')
+    document.getElementsByClassName('router_bamboo')[0].classList.remove('active_bamboo')
+    document.getElementsByClassName('router_schedule')[0].classList.remove('active_schedule')
     axios.get(`${this.url}/member/student/${this.idx}`)
     .then(response => {
       if (response.data.status === 200) {
@@ -96,6 +99,17 @@ export default {
   position: relative;
   padding: 30px;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    -ms-flex-direction: column;
+    justify-content: start;
+  }
+  @media screen and (max-width: 450px) {
+    padding: 25px;
+  }
+  @media screen and (max-width: 350px) {
+    padding: 20px;
+  }
   &_wave {
     position: fixed;
     width: 100%;
@@ -109,14 +123,25 @@ export default {
     flex-direction: column;
     -ms-flex-direction: column;
     max-width: 450px;
+    @media screen and (max-width: 768px) {
+      max-width: 100%;
+      width: 100%;
+    }
     &_profile {
       width: 100%;
       display: flex;
       display: -webkit-flex;
       height: 80px;
+      @media screen and (max-width: 768px) {
+        height: 50px; 
+      }
       &_img {
         width: 80px;
         height: 80px;
+        @media screen and (max-width: 768px) {
+          width: 50px;
+          height: 50px; 
+        }
       }
       &_text {
         margin-left: 20px;
@@ -128,10 +153,18 @@ export default {
         &_title {
           font-size: 25px;
           font-weight: 700;
+          text-align: left;
+          @media screen and (max-width: 768px) {
+            font-size: 22px; 
+          }
         }
         &_name {
+          text-align: left;
           font-size: 33px;
           font-weight: 800;
+          @media screen and (max-width: 768px) {
+            font-size: 28px;
+          }
         }
       }
     }
@@ -148,24 +181,43 @@ export default {
       -ms-flex-direction: column;
       padding: 20px;
       text-align: left;
+      @media screen and (max-width: 768px) {
+        margin-top: 20px;
+        height: 110px;
+      }
+      @media screen and (max-width: 350px) {
+        margin-top: 10px;
+      }
       &_title {
         color: black;
         font-weight: 800;
         font-size: 18px;
+        @media screen and (max-width: 768px) {
+          font-size: 16px;
+        }
       }
       &_calendar {
         display: flex;
         display: -webkit-flex;
         align-items: center;
         margin-top: 15px;
+        @media screen and (max-width: 768px) {
+          margin-top: 10px;
+        }
         &_img {
           width: 28px;
+          @media screen and (max-width: 768px) {
+            width: 20px;
+          }
         }
         span {
           margin-left: 5px;
           color: #2D008A;
           font-size: 22px;
           font-weight: 800;
+          @media screen and (max-width: 768px) {
+            font-size: 19px;
+          }
         }
       }
       &_today {
@@ -173,6 +225,9 @@ export default {
         font-size: 18px;
         color: #2D008A;
         font-weight: 400;
+        @media screen and (max-width: 768px) {
+          font-size: 16px;
+        }
       }
     }
     &_bamboo {
@@ -193,13 +248,30 @@ export default {
       display: -webkit-flex;
       align-items: center;
       color: white;
+      @media screen and (max-width: 768px) {
+        margin-top: 20px;
+        height: 80px;
+        font-size: 16px;
+      }
+      @media screen and (max-width: 450px) {
+        font-size: 15px;
+      }
+      @media screen and (max-width: 350px) {
+        margin-top: 10px;
+      }
       b {
         font-weight: 800;
         font-size: 21px;
+        @media screen and (max-width: 768px) {
+          font-size: 19px;
+        }
+        @media screen and (max-width: 450px) {
+          font-size: 17px;
+        }
       }
       &_img {
         position: absolute;
-        height: 110px;
+        height: 100%;
         right: 60px;
         top: 0;
       }
@@ -207,6 +279,9 @@ export default {
         position: absolute;
         width: 30px;
         right: 20px;
+        @media screen and (max-width: 768px) {
+          width: 20px;
+        }
       }
     }
   }

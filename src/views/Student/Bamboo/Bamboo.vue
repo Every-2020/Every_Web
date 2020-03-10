@@ -8,6 +8,9 @@
 export default {
   name: 'bamboo',
   mounted () {
+    document.getElementsByClassName('router_home')[0].classList.remove('active_home')
+    document.getElementsByClassName('router_bamboo')[0].classList.add('active_bamboo')
+    document.getElementsByClassName('router_schedule')[0].classList.remove('active_schedule')
     document.getElementsByClassName('screen')[0].style.backgroundColor = "#FCFCFC"
   },
   destroyed() {

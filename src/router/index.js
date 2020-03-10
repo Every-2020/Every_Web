@@ -39,7 +39,7 @@ const routes = [
         meta: {
           title: 'Every'
         },
-        component: () => import(/* */'@/views/Student/Home.vue'),
+        component: () => import(/* */'@/views/Student/Home/Home.vue'),
       },
       {
         name: '',
@@ -64,6 +64,14 @@ const routes = [
             component: () => import(/* */'@/views/Student/Bamboo/BambooPage.vue')
           }
         ]
+      },
+      {
+        name: 'schedule',
+        path: 'schedule',
+        meta: {
+          title: 'Every - 일정'
+        },
+        component: () => import(/* */'@/views/Student/Schedule/Schedule.vue'),
       },
     ]
   },

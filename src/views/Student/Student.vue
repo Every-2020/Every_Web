@@ -3,15 +3,18 @@
     <div class="main_header">
       <div class="main_header_nav">
         <div class="main_header_nav_container">
-          <div @click="refresh" class="main_header_nav_container_logo">
-            <img src="../../assets/logo.png" alt="logo">
-          </div>
           <div class="main_header_nav_container_logo">
+            <img @click="refresh" src="../../assets/logo.png" alt="logo">
+          </div>
+          <div class="main_header_nav_container_route">
             <router-link to="/">
               <div class="router_home"></div>
             </router-link>
             <router-link to="bamboo">
               <div class="router_bamboo"></div>
+            </router-link>
+            <router-link to="schedule">
+              <div class="router_schedule"></div>
             </router-link>
           </div>
         </div>
@@ -35,6 +38,21 @@ export default {
 </script>
 
 <style lang="scss">
+a {
+  margin-left: 20px;
+}
+.active_home {
+  background: url('../../assets/student/homeSelect.png') !important;
+  background-size: cover !important;
+}
+.active_bamboo {
+  background: url('../../assets/student/bambooSelect.png') !important;
+  background-size: cover !important;
+}
+.active_schedule {
+  background: url('../../assets/student/scheduleSelect.png') !important;
+  background-size: cover !important;
+}
 .router {
   &_home {
     background: url('../../assets/student/home.png');
@@ -46,14 +64,9 @@ export default {
       height: 20px;
     }
   }
-  &-link-exact-active &_home {
-    background: url('../../assets/student/homeSelect.png');
-    background-size: cover;
-  }
   &_bamboo {
     background: url('../../assets/student/bamboo.png');
     background-size: cover;
-    margin-left: 20px;
     width: 30px;
     height: 30px;
     @media screen and (max-width: 450px) {
@@ -61,9 +74,15 @@ export default {
       height: 20px;
     }
   }
-  &-link-exact-active &_bamboo {
-    background: url('../../assets/student/bambooSelect.png');
+  &_schedule {
+    background: url('../../assets/student/schedule.png');
     background-size: cover;
+    width: 30px;
+    height: 30px;
+    @media screen and (max-width: 450px) {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 .main {
@@ -115,13 +134,19 @@ export default {
           display: flex;
           display: -webkit-flex;
           align-items: center;
-          cursor: pointer;
           img {
+            cursor: pointer;
             width: 55px;
             @media screen and (max-width: 450px) {
               width: 40px;
             }
           }
+        }
+        &_route {
+          display: flex;
+          display: -webkit-flex;
+          text-align: right;
+          align-items: flex-end;
         }
       }
     }
