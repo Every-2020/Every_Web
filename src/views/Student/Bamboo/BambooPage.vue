@@ -5,7 +5,7 @@
         <div class="page_box_content_header">
           <img @click="close" src="../../../assets/back.png" class="back" alt="back">
           <div class="page_box_content_header_profile">
-            <img src="../../../assets/bamboo/profile.png" alt="profile" class="profile">
+            <img src="../../../assets/student/bamboo/profile.png" alt="profile" class="profile">
             <div class="page_box_content_header_items">
               <div class="page_box_content_header_title">
                 <span>#{{ idx }}번째 이야기</span>

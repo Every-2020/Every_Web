@@ -14,7 +14,7 @@
       <bamboo-footer @onPageView="onPageView" :idx="post.idx"></bamboo-footer>
     </div>
     <div @click="open" class="post_add">
-      <img src="../../../assets/bamboo/add.png" alt="add">
+      <img src="../../../assets/student/bamboo/add.png" alt="add">
     </div>
     <bamboo-add @onAdd="refresh" @onBack="close" v-if="add"></bamboo-add>
   </div>
