@@ -14,7 +14,7 @@
       <bamboo-footer @onPageView="onPageView" :idx="post.idx"></bamboo-footer>
     </div>
     <div @click="open" class="post_add">
-      <img src="../../assets/bamboo/add.png" alt="add">
+      <img src="../../../assets/bamboo/add.png" alt="add">
     </div>
     <bamboo-add @onAdd="refresh" @onBack="close" v-if="add"></bamboo-add>
   </div>
@@ -23,10 +23,10 @@
 <script>
 import server from '@/models/server'
 import axios from 'axios'
-import BambooLoad from '@/components/Bamboo/BambooLoad.vue'
-import BambooFooter from '@/components/Bamboo/BambooFooter.vue'
-import BambooHeader from '@/components/Bamboo/BambooHeader.vue'
-import BambooAdd from '@/components/Bamboo/BambooAdd.vue'
+import BambooLoad from '@/components/Student/Bamboo/BambooLoad.vue'
+import BambooFooter from '@/components/Student/Bamboo/BambooFooter.vue'
+import BambooHeader from '@/components/Student/Bamboo/BambooHeader.vue'
+import BambooAdd from '@/components/Student/Bamboo/BambooAdd.vue'
 export default {
   data: () => {
     return {

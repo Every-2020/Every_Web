@@ -3,8 +3,8 @@
     <div @click="onBack" class="add_post_area"></div>
     <div class="add_post_box">
       <div class="add_post_box_header">
-        <img @click="onBack" src="../../assets/back.png" alt="back" class="add_post_box_header_back">
-        <img src="../../assets/bamboo/profile.png" alt="profile" class="add_post_box_header_profile">
+        <img @click="onBack" src="../../../assets/back.png" alt="back" class="add_post_box_header_back">
+        <img src="../../../assets/student/bamboo/profile.png" alt="profile" class="add_post_box_header_profile">
         <span>익명</span>
       </div>
       <textarea class="add_post_textarea" placeholder="글을 작성해주세요!" maxlength="250" v-model="content"></textarea>

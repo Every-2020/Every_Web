@@ -8,11 +8,17 @@ const routes = [
   {
     path: '/login',
     name: 'login',
+    meta: {
+      title: 'Every - 로그인'
+    },
     component: () => import(/* */'@/views/Login.vue')
   },
   {
     path: '/register',
     name: 'register',
+    meta: {
+      title: 'Every - 가입'
+    },
     component: () => import(/* */'@/views/Register.vue')
   },
   {
@@ -30,23 +36,32 @@ const routes = [
       {
         name: 'student',
         path: '',
+        meta: {
+          title: 'Every'
+        },
         component: () => import(/* */'@/views/Student/Home.vue'),
       },
       {
         name: '',
         path: 'bamboo',
-        component: () => import(/* */'@/views/Student/Bamboo.vue'),
+        component: () => import(/* */'@/views/Student/Bamboo/Bamboo.vue'),
         children: [
           {
             name: 'bamboo',
             path: '',
-            component: () => import(/* */'@/components/Bamboo/BambooPost.vue')
+            meta: {
+              title: 'Every - 대나무 숲'
+            },
+            component: () => import(/* */'@/views/Student/Bamboo/BambooPost.vue')
           },
           {
             name: 'bambooPage',
             path: 'page/',
+            meta: {
+              title: 'Every - 게시물'
+            },
             props: (route) => ({ idx: route.query.idx }),
-            component: () => import(/* */'@/components/Bamboo/Page/BambooPage.vue')
+            component: () => import(/* */'@/views/Student/Bamboo/BambooPage.vue')
           }
         ]
       },
@@ -58,13 +73,14 @@ const router = new VueRouter({
   base: '/every/',
   mode: 'history',
   routes,
-  // scrollBehavior (to, from, savedPosition) {
-  //   if (savedPosition) {
-  //     return savedPosition
-  //   } else {
-  //     return { x: 0, y: 0 }
-  //   }
-  // }
 })
+
+router.beforeEach((to, from, next) => {
+    /* It will change the title when the router is change*/
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
+});
 
 export default router

@@ -4,7 +4,7 @@
     <div class="comment_footer_content">
       <div class="comment_footer_content_box">
         <textarea maxlength="250" type="text" v-model="comment" placeholder="댓글 달기..."></textarea>
-        <img @click="onSubmit" src="../../../assets/bamboo/submit.png" alt="submit">
+        <img @click="onSubmit" src="../../../../assets/student/bamboo/submit.png" alt="submit">
       </div>
     </div>
   </div>

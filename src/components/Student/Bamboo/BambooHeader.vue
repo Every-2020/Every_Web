@@ -1,7 +1,7 @@
 <template>
   <div class="post_header">
     <div class="post_header_img">
-      <img src="../../assets/bamboo/profile.png" alt="profile">
+      <img src="../../../assets/student/bamboo/profile.png" alt="profile">
     </div>
     <div class="post_header_content">
       <div class="post_header_content_title">

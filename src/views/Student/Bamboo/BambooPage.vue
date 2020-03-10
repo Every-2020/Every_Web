@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import CommentAdd from '@/components/Bamboo/Page/PageAddComment.vue'
-import PageComment from '@/components/Bamboo/Page/PageComment.vue'
+import CommentAdd from '@/components/Student/Bamboo/Page/PageAddComment.vue'
+import PageComment from '@/components/Student/Bamboo/Page/PageComment.vue'
 import server from '@/models/server'
 import axios from 'axios'
 export default {

@@ -14,9 +14,9 @@
     </div>
     <div v-else class="comment_area" v-for="(comment, index) in comments" :key="index">
       <div class="comment_area_content">
-        <img class="comment_profile" src="../../../assets/bamboo/profile.png" alt="profile">
+        <img class="comment_profile" src="../../../../assets/student/bamboo/profile.png" alt="profile">
         <div class="comment_area_box">
-          <img class="comment_area_box_img" src="../../../assets/bamboo/comment.png" alt="comment">
+          <img class="comment_area_box_img" src="../../../../assets/student/bamboo/comment.png" alt="comment">
           <div class="comment_area_box_content">
             <div>
               <span class="comment_area_box_content_title">
@@ -27,16 +27,16 @@
           </div>
         </div>
         <div class="comment_area_more" v-if="comment.student_idx === my_idx">
-          <img class="comment_area_more_img" @click="onClick(comment)" src="../../../assets/bamboo/more.png" alt="more">
+          <img class="comment_area_more_img" @click="onClick(comment)" src="../../../../assets/student/bamboo/more.png" alt="more">
           <div class="comment_more" v-if="comment.edit">
             <div @click="onClose(comment)" class="comment_more_area"></div>
             <div class="comment_more_box">
               <div @click="openEdit(comment)" class="comment_more_box_edit">
-                <img src="../../../assets/bamboo/edit.png" alt="edit">
+                <img src="../../../../assets/student/bamboo/edit.png" alt="edit">
                 <span>댓글 수정하기</span>
               </div>
               <div @click="onDelete(comment)" class="comment_more_box_delete">
-                <img src="../../../assets/bamboo/delete.png" alt="delete">
+                <img src="../../../../assets/student/bamboo/delete.png" alt="delete">
                 <span>댓글 삭제하기</span>
               </div>
             </div>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import CommentEdit from '@/components/Bamboo/Page/PageEditComment'
+import CommentEdit from '@/components/Student/Bamboo/Page/PageEditComment'
 import axios from 'axios'
 import server from '@/models/server'
 export default {

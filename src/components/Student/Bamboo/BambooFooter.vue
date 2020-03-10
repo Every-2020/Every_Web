@@ -7,7 +7,7 @@
       <div class="post_footer_content_line"></div>
       <div class="post_footer_content_text">
         <input type="text" readonly placeholder="댓글 달기...">
-        <img src="../../assets/bamboo/submit.png" alt="submit">
+        <img src="../../../assets/student/bamboo/submit.png" alt="submit">
       </div>
     </div>
   </div>

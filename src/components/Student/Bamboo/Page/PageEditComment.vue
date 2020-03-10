@@ -3,8 +3,8 @@
     <div @click="onBack" class="comment_popup_area"></div>
     <div class="comment_popup_box">
       <div class="comment_popup_box_header">
-        <img @click="onBack" src="../../../assets/back.png" alt="back" class="comment_popup_box_header_back">
-        <img src="../../../assets/bamboo/profile.png" alt="profile" class="comment_popup_box_header_profile">
+        <img @click="onBack" src="../../../../assets/back.png" alt="back" class="comment_popup_box_header_back">
+        <img src="../../../../assets/student/bamboo/profile.png" alt="profile" class="comment_popup_box_header_profile">
         <span>{{ name }}</span>
       </div>
       <textarea maxlength="250" class="comment_edit" v-model="edit"></textarea>
