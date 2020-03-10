@@ -46,6 +46,10 @@ export default {
       height: 20px;
     }
   }
+  &-link-exact-active &_home {
+    background: url('../../assets/student/homeSelect.png');
+    background-size: cover;
+  }
   &_bamboo {
     background: url('../../assets/student/bamboo.png');
     background-size: cover;
@@ -56,6 +60,10 @@ export default {
       width: 20px;
       height: 20px;
     }
+  }
+  &-link-exact-active &_bamboo {
+    background: url('../../assets/student/bambooSelect.png');
+    background-size: cover;
   }
 }
 .main {
