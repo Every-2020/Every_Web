@@ -7,15 +7,15 @@
             <img @click="refresh" src="../../assets/logo.png" alt="logo">
           </div>
           <div class="main_header_nav_container_route">
-            <router-link to="/">
+            <a href="/">
               <div class="router_home"></div>
-            </router-link>
-            <router-link to="bamboo">
+            </a>
+            <a href="/bamboo">
               <div class="router_bamboo"></div>
-            </router-link>
-            <router-link to="schedule">
+            </a>
+            <a href="/schedule">
               <div class="router_schedule"></div>
-            </router-link>
+            </a>
           </div>
         </div>
       </div>

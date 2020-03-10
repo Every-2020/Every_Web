@@ -78,7 +78,6 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  base: '/every/',
   mode: 'history',
   routes,
 })
