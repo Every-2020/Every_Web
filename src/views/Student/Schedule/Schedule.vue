@@ -5,10 +5,14 @@
         <schedule-calendar
           :eventCategories="eventCategories"
           :events="events"
+          @onClick="dayPick"
         />
       </div>
       <div class="schedule_box_right">
-
+        <schedule-list
+          :events="filteredEvent"
+          :selectDay="selectedDay"
+        />
       </div>
     </div>
   </div>
@@ -18,6 +22,7 @@
 import axios from 'axios'
 import server from '@/models/server'
 import ScheduleCalendar from '@/components/Student/Schedule/ScheduleCalendar.vue'
+import ScheduleList from '@/components/Student/Schedule/ScheduleList.vue'
 export default {
   name: 'schedule',
   data() {
@@ -25,6 +30,9 @@ export default {
       url: server,
       events: [],
       eventList: [],
+      selected: '',
+      selectedDay: '',
+      filteredEvent: [],
       eventCategories: [
         {
           id: 1,
@@ -33,6 +41,22 @@ export default {
           backgroundColor: '#2D008A'
         }
       ]
+    }
+  },
+  watch: {
+    selected: function () {
+      this.filteredEvent = []
+      this.eventList.forEach(event => {
+        let select = this.selected.getTime()
+        let start = new Date(event.start_date + " 00:00:00.000")
+        let end = new Date(event.end_date + " 23:59:59.000")
+
+        start = start.getTime()
+        end = end.getTime()
+        if (select >= start && select < end) {
+          this.filteredEvent.push(event)
+        }
+      });
     }
   },
   mounted () {
@@ -51,12 +75,28 @@ export default {
             title: event.title
           })
         }
+        this.dayPick(new Date())
       }
     })
   },
   components: {
-    ScheduleCalendar
-  }
+    ScheduleCalendar,
+    ScheduleList
+  },
+  methods: {
+    dayPick (day) {
+      this.selected = day
+      let month = day.getMonth() + 1
+      let date = day.getDate()
+      if (month < 10) {
+        month = "0" + month
+      }
+      if (date < 10) {
+        date = "0" + date
+      }
+      this.selectedDay = day.getFullYear() + "-" + month + "-" + date
+    }
+  },
 }
 </script>
 
@@ -70,11 +110,18 @@ export default {
   align-items: center;
   padding: 20px;
   @media screen and (max-width: 980px) {
-    padding: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  @media screen and (max-width: 767px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media screen and (max-width: 450px) {
+    padding: 10px;
   }
   &_box {
     position: relative;
-    z-index: 50;
     width: 100%;
     max-width: 1100px;
     height: 595px;
@@ -85,22 +132,29 @@ export default {
     @media screen and (max-width: 980px) {
       flex-direction: column;
       -ms-flex-direction: column;
-      height: 800px;
+      height: 1000px;
     }
     &_left {
       position: relative;
       width: 50%;
       height: 100%;
+      box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.123);
       padding: 30px;
       display: flex;
       display: -webkit-flex;
       justify-content: center;
       align-items: center;
+      @media screen and (max-width: 980px) {
+        width: 100%;
+      }
     }
     &_right {
       position: relative;
       width: 50%;
       height: 100%;
+      @media screen and (max-width: 980px) {
+        width: 100%;
+      }
     }
   }
 }

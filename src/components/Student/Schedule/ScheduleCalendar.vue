@@ -135,7 +135,8 @@ export default {
         if (date.isInRange(event.start, event.end, event.repeat) && date.getPrevDay().isInRange(event.start, event.end, event.repeat)) {
           let category = this.eventCategories.find(item => item.id === event.categoryId) || {}
           Object.assign(style, {
-            backgroundColor: category.backgroundColor
+            backgroundColor: category.backgroundColor,
+            border: "1px solid " + category.backgroundColor
           })
         }
       }
@@ -147,6 +148,7 @@ export default {
         if (date.isInRange(event.start, event.end, event.repeat) && date.getNextDay().isInRange(event.start, event.end, event.repeat)) {
           let category = this.eventCategories.find(item => item.id === event.categoryId) || {}
           Object.assign(style, {
+            border: "1px solid " + category.backgroundColor,
             backgroundColor: category.backgroundColor
           })
         }
@@ -155,6 +157,10 @@ export default {
     },
     goToday () {
       this.date = this.today
+    },
+    onClick(day) {
+      const Day = new Date(this.selectedYear + this.selectedMonthName + day)
+      this.$emit('onClick', Day)
     }
   },
   props: {
@@ -184,11 +190,6 @@ export default {
         return []
       }
     },
-    onClick(day) {
-      const Day = new Date(this.selectedYear + this.selectedMonthName + day)
-      console.log(Day)
-      
-    }
   },
   beforeMount () {
     this.date = Date.parse(this.initialDate) ? new date(this.initialDate) : new date()
@@ -197,119 +198,126 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss">
 
-#sweetCalendar
-  width: 100%
-  .container
-    display: grid
-    grid-template-rows: 40px 1fr
-
-    .header
-      align-items: center
-      display: grid
-      grid-column-gap: 5px
-      grid-template-columns: 50px 1fr 50px
-      color: #2D008A
-
-      .month
-        justify-self: center
-        font-size: 30px
-        font-weight: 800
-
-      .left-arrow
-        justify-self: end
-
-        img
-          width: 30px
+#sweetCalendar {
+  width: 100%;
+  .container {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    .header {
+      align-items: center;
+      display: grid;
+      grid-column-gap: 5px;
+      grid-template-columns: 50px 1fr 50px;
+      color: #2D008A;
+      .month {
+        justify-self: center;
+        font-size: 30px;
+        font-weight: 800;
+      }
+      .left-arrow {
+        justify-self: end;
+        img {
+          width: 30px;
+          cursor: pointer;
+          transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+        }
+      }
+      .right-arrow {
+        justify-self: start;
+        img {
+          cursor: pointer;
+          width: 30px;
+        }
+      }
+    }
+    .body {
+      margin-top: 20px;
+      align-items: center;
+      display: grid;
+      grid-row-gap: 30px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      justify-items: center;
+      .day-name {
+        color: #2D008A;
+        font-weight: 800;
+        font-size: 21px;
+      }
+      .day-container {
+        display: grid;
+        grid-auto-columns: 1fr 1fr;
+        grid-auto-flow: column;
+        height: 40px;
+        position: relative;
+        width: 100%;
+        .day {
+          align-content: center;
+          border-radius: 15px;
+          box-sizing: content-box;
+          color: #2D008A;
+          display: grid;
+          height: 100%;
+          justify-content: center;
+          left: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          cursor: pointer;
+          font-weight: 800;
+          &:hover {
+            background-color: rgb(124, 85, 202) !important;
+            color: white !important;
+          }
+          &.today {
+            background-color: #BD9113 !important;
+          }
+          span {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            width: fit-content;
+          }
+        }
+      }
+    }
+  }
+}
+.calendar {
+  background-color: inherit;
+  .body {
+    .day-container {
+      .before {
+        height: 40px;
+      }
+      .after {
+        height: 40px;
+      }
+    }
+  }
+}
+.date-picker {
+  background-color: inherit;
+  .body {
+    .day-container {
+      .day {
+        &:hover {
+          // background-color: $selection-hover-color
+          // border: 2px solid $selected-color
           cursor: pointer
-          transform: rotate(180deg)
-          -o-transform: rotate(180deg)
-          -webkit-transform: rotate(180deg)
-          -ms-transform: rotate(180deg)
-          -moz-transform: rotate(180deg)
-
-      .right-arrow
-        justify-self: start
-
-        img
-          cursor: pointer
-          width: 30px
-
-    .body
-      margin-top: 20px
-      align-items: center
-      display: grid
-      grid-row-gap: 30px
-      grid-template-columns: repeat(7, 1fr)
-      grid-template-rows: repeat(7, 1fr)
-      justify-items: center
-
-      .day-name
-        color: white
-        font-weight: 800
-        font-size: 21px
-
-      .day-container
-        display: grid
-        grid-auto-columns: 1fr 1fr
-        grid-auto-flow: column
-        height: 40px
-        position: relative
-        width: 100%
-
-        .day
-          align-content: center
-          border-radius: 14px
-          box-sizing: content-box
-          color: #2D008A
-          display: grid
-          height: 20px
-          justify-content: center
-          left: 50%
-          padding: 10px
-          position: absolute
-          top: 50%
-          transform: translate(-50%, -50%)
-          width: 20px
-          cursor: pointer
-          font-weight: 800
-          &:hover
-            background-color: rgb(124, 85, 202) !important
-            color: white !important
-          &.today
-            background-color: #BD9113 !important
-
-          span
-            font-size: 18px
-            margin: 0
-            padding: 0
-            width: fit-content
-
-  .calendar
-    background-color: inherit
-
-    .body
-      .day-container
-        .before
-          height: 40px
-
-        .after
-          height: 40px
-
-  .date-picker
-    background-color: inherit
-
-    .body
-      .day-container
-        .day
-          &:hover
-            // background-color: $selection-hover-color
-            // border: 2px solid $selected-color
-            cursor: pointer
-
-          &.selected
-            // border: 2px solid $selected-color
-            // color: $selected-color
-
+        }
+        &.selected {
+          // border: 2px solid $selected-color
+          // color: $selected-color
+        }
+      }
+    }
+  }
+}
 </style>
