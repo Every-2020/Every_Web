@@ -205,16 +205,27 @@ export default {
   .container {
     display: grid;
     grid-template-rows: 40px 1fr;
+    @media screen and (max-width: 450px) {
+      grid-template-rows: 20px 1fr;
+    }
     .header {
       align-items: center;
       display: grid;
-      grid-column-gap: 5px;
+      column-gap: 5px;
+      -webkit-column-gap: 5px;
+      -moz-column-gap: 5px;
       grid-template-columns: 50px 1fr 50px;
       color: #2D008A;
       .month {
         justify-self: center;
         font-size: 30px;
         font-weight: 800;
+        @media screen and (max-width: 450px) {
+          font-size: 25px; 
+        }
+        @media screen and (max-width: 350px) {
+          font-size: 21px;
+        }
       }
       .left-arrow {
         justify-self: end;
@@ -226,6 +237,12 @@ export default {
           -webkit-transform: rotate(180deg);
           -ms-transform: rotate(180deg);
           -moz-transform: rotate(180deg);
+          @media screen and (max-width: 450px) {
+            width: 25px;
+          }
+          @media screen and (max-width: 450px) {
+            width: 21px;
+          }
         }
       }
       .right-arrow {
@@ -233,6 +250,12 @@ export default {
         img {
           cursor: pointer;
           width: 30px;
+          @media screen and (max-width: 450px) {
+            width: 25px;
+          }
+          @media screen and (max-width: 450px) {
+            width: 21px;
+          }
         }
       }
     }
@@ -240,14 +263,26 @@ export default {
       margin-top: 20px;
       align-items: center;
       display: grid;
-      grid-row-gap: 30px;
+      row-gap: 30px;
       grid-template-columns: repeat(7, 1fr);
       grid-template-rows: repeat(7, 1fr);
       justify-items: center;
+      @media screen and (max-width: 450px) {
+        row-gap: 15px;
+      }
+      @media screen and (max-width: 350px) {
+        row-gap: 10px;
+      }
       .day-name {
         color: #2D008A;
         font-weight: 800;
         font-size: 21px;
+        @media screen and (max-width: 450px) {
+          font-size: 19px;
+        }
+        @media screen and (max-width: 350px) {
+          font-size: 17px;
+        }
       }
       .day-container {
         display: grid;
@@ -256,6 +291,9 @@ export default {
         height: 40px;
         position: relative;
         width: 100%;
+        @media screen and (max-width: 350px) {
+          height: 30px;
+        }
         .day {
           align-content: center;
           border-radius: 15px;
@@ -271,6 +309,10 @@ export default {
           width: 40px;
           cursor: pointer;
           font-weight: 800;
+          @media screen and (max-width: 350px) {
+            width: 30px;
+            border-radius: 10px;
+          }
           &:hover {
             background-color: rgb(124, 85, 202) !important;
             color: white !important;
@@ -283,6 +325,9 @@ export default {
             margin: 0;
             padding: 0;
             width: fit-content;
+            @media screen and (max-width: 450px) {
+              font-size: 16px;
+            }
           }
         }
       }
@@ -295,9 +340,15 @@ export default {
     .day-container {
       .before {
         height: 40px;
+        @media screen and (max-width: 350px) {
+          height: 30px;
+        }
       }
       .after {
         height: 40px;
+        @media screen and (max-width: 350px) {
+          height: 30px;
+        }
       }
     }
   }

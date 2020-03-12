@@ -1,5 +1,6 @@
 <template>
   <div class="schedule_add">
+    <div @click="close" class="schedule_add_area"></div>
     <div class="schedule_add_box">
       <div class="schedule_add_title">
         <span>일정 제목</span>
@@ -18,14 +19,16 @@
       </div>
       <datepicker :format="format" v-model="end"></datepicker>
       <div class="schedule_btn">
-        <div class="schedule_btn_com">추가</div>
-        <div class="schedule_btn_can">취소</div>
+        <div @click="add" class="schedule_btn_com">추가</div>
+        <div @click="close" class="schedule_btn_can">취소</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import server from '@/models/server'
 import Datepicker from 'vuejs-datepicker'
 export default {
   props: ['day'],
@@ -35,17 +38,57 @@ export default {
       end: '',
       title: '',
       content: '',
-      format: 'yyyy-MM-dd'
+      format: 'yyyy-MM-dd',
+      url: server
     }
   },
   components: { Datepicker },
   mounted() {
     document.getElementsByTagName('body')[0].classList.add('not_scroll')
-    this.start = this.day
-    this.end = this.day
+    this.start = new Date(this.day)
+    this.end = new Date (this.day)
   },
   destroyed() {
     document.getElementsByTagName('body')[0].classList.remove('not_scroll')
+  },
+  methods: {
+    add() {
+      if (this.title && this.content && this.start <= this.end) {
+        axios.post(`${this.url}/schedule`, {
+          title: this.title,
+          content: this.content,
+          start_date: this.getDate(this.start),
+          end_date: this.getDate(this.end)
+        })
+        .then((response) => {
+          if (response.data.status === 200) {
+            this.$emit('onAdd')
+          }
+        })
+        .catch(() => {
+          this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+          this.$router.push({name: 'login'})
+        })
+      } else if (!this.title || !this.content) {
+        this.$swal('오류','내용을 입력해주세요.','error')
+      } else {
+        this.$swal('오류','올바른 날짜가 아닙니다.','error')
+      }
+    },
+    getDate(day) {
+      let month = day.getMonth() + 1
+      let date = day.getDate()
+      if (month < 10) {
+        month = "0" + month
+      }
+      if (date < 10) {
+        date = "0" + date
+      }
+      return day.getFullYear() + "-" + month + "-" + date
+    },
+    close () {
+      this.$emit('close')
+    }
   },
 }
 </script>
@@ -115,8 +158,8 @@ export default {
     margin-left: 30px;
     box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.123);
     border-radius: 13px;
+    font-weight: 700;
     box-sizing: border-box;
-    border: 1px solid rgb(197, 197, 197);
     display: flex;
     display: -webkit-flex;
     justify-content: center;
@@ -136,11 +179,20 @@ export default {
   background: rgba(0, 0, 0, 0.3);
   z-index: 101;
   padding: 15px;
+  &_area {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 102;
+  }
   &_box {
     width: 100%;
     height: 570px;
     max-width: 400px;
     box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.123);
+    z-index: 103;
     background: white;
     display: flex;
     display: -webkit-flex;

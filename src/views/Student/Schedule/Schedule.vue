@@ -12,6 +12,7 @@
         <schedule-list
           :events="filteredEvent"
           :selectDay="selectedDay"
+          @Refresh="refresh"
         />
       </div>
     </div>
@@ -78,6 +79,10 @@ export default {
         this.dayPick(new Date())
       }
     })
+    .catch(() => {
+      this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+      this.$router.push({name: 'login'})
+    })
   },
   components: {
     ScheduleCalendar,
@@ -95,6 +100,9 @@ export default {
         date = "0" + date
       }
       this.selectedDay = day.getFullYear() + "-" + month + "-" + date
+    },
+    refresh () {
+      history.go(0)
     }
   },
 }
@@ -134,6 +142,12 @@ export default {
       -ms-flex-direction: column;
       height: 1000px;
     }
+    @media screen and (max-width: 450px) {
+      height: 900px;
+    }
+    @media screen and (max-width: 350px) {
+      height: 800px;
+    }
     &_left {
       position: relative;
       width: 50%;
@@ -146,6 +160,10 @@ export default {
       align-items: center;
       @media screen and (max-width: 980px) {
         width: 100%;
+        height: auto;
+      }
+      @media screen and (max-width: 450px) {
+        padding: 20px;
       }
     }
     &_right {

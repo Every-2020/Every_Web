@@ -6,6 +6,7 @@
         <span>일정 추가하기</span>
       </div>
       <div class="schedule_list_box column" v-for="(event, index) in events" :key="index">
+        <img class="calendar_" src="../../../assets/student/schedule/calendar_.png" alt="calendar_">
         <div class="schedule_list_title">
           <img src="../../../assets/student/schedule/calendar.png" alt="calendar">
           <span>{{getTitle(event.title)}}</span>
@@ -18,6 +19,8 @@
     <schedule-add
       v-if="add"
       :day="selectDay"
+      @onAdd="refresh"
+      @close="close"
     />
   </div>
 </template>
@@ -56,6 +59,13 @@ export default {
         return string + " ~ " + end.substr(5, 2) + "월 " + end.substr(8, 2) + "일"
       }
       return string + " ~ " + end.substr(0,4) + "년 " + end.substr(5, 2) + "월 " + end.substr(8, 2) + "일"
+    },
+    refresh () {
+      this.close()
+      this.$emit('Refresh')
+    },
+    close () {
+      this.add = false
     }
   },
 }
@@ -65,6 +75,15 @@ export default {
 .column {
   flex-direction: column;
   -ms-flex-direction: column;
+}
+.calendar_ {
+  position: absolute;
+  width: 80px;
+  bottom: 0;
+  right: 40px;
+  @media screen and (max-width: 450px) {
+    width: 70px;
+  }
 }
 .schedule_list {
   width: 100%;
@@ -79,6 +98,12 @@ export default {
     flex-direction: column;
     -ms-flex-direction: column;
     align-items: center;
+    @media screen and (max-width: 450px) {
+      padding: 20px 40px;
+    }
+    @media screen and (max-width: 350px) {
+      padding: 20px 20px;
+    }
   }
   &_add {
     background-color: #fff !important;
@@ -86,8 +111,20 @@ export default {
     font-size: 20px;
     align-items: center;
     font-weight: 800;
+    @media screen and (max-width: 450px) {
+      font-size: 18px;
+    }
+    @media screen and (max-width: 350px) {
+      font-size: 17px;
+    }
     &_img {
       width: 28px;
+      @media screen and (max-width: 450px) {
+        width: 24px;
+      }
+      @media screen and (max-width: 350px) {
+        width: 20px;
+      }
     }
     span {
       margin-left: 10px;
@@ -107,6 +144,11 @@ export default {
     justify-content: center;
     text-align: left;
     padding: 20px;
+    position: relative;
+    @media screen and (max-width: 450px) {
+      width: 100%;
+      height: 70px;
+    }
   }
   &_title {
     display: flex;
@@ -114,18 +156,38 @@ export default {
     img {
       width: 24px;
       height: 24px;
+      @media screen and (max-width: 450px) {
+        width: 19px;
+        height: 19px;
+      }
+      @media screen and (max-width: 350px) {
+        width: 17px;
+        height: 17px;
+      }
     }
     span {
       font-size: 20px;
       color: white;
       font-weight: 800;
       margin-left: 5px;
+      @media screen and (max-width: 450px) {
+        font-size: 18px;
+      }
+      @media screen and (max-width: 350px) {
+        font-size: 17px;
+      }
     }
   }
   &_content {
     margin-top: 5px;
     color: white;
     font-size: 16px;
+    @media screen and (max-width: 450px) {
+      font-size: 13.5px;
+    }
+    @media screen and (max-width: 350px) {
+      font-size: 12.8px;
+    }
   }
 }
 </style>
