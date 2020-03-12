@@ -60,6 +60,10 @@ export default {
         this.items = response.data.data.post
       }
     })
+    .catch(() => {
+      this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+      this.$router.push({name: 'login'})
+    })
   },
   methods: {
     close () {

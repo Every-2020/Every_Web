@@ -55,6 +55,10 @@ export default {
             }, 200);
           }
         })
+        .catch(() => {
+          this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+          this.$router.push({name: 'login'})
+        })
       } else {
         this.$swal('오류','입력란을 작성해주세요.','error')
       }

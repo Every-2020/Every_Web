@@ -9,7 +9,7 @@
           <span class="home_left_profile_text_name">{{ name }}</span>
         </div>
       </div>
-      <div class="home_left_schedule">
+      <div class="home_left_schedule" @click="toSchedule">
         <span class="home_left_schedule_title">오늘의 일정</span>
         <div class="home_left_schedule_calendar">
           <img class="home_left_schedule_calendar_img" src="../../../assets/student/home/calendar.png" alt="calendar">
@@ -60,6 +60,10 @@ export default {
         this.name = response.data.data.member.name + "님"
       }
     })
+    .catch(() => {
+      this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+      this.$router.push({name: 'login'})
+    })
     
     axios.get(`${this.url}/schedule`)
     .then(response => {
@@ -68,16 +72,17 @@ export default {
         this.schedules.forEach(schedule => {
           let day = new Date()
           let start = new Date(schedule.start_date + " 00:00:00.000")
-          let end = new Date(schedule.end_date + " 00:00:00.000")
+          let end = new Date(schedule.end_date + " 23:59:59.000")
           
-          day = day.getTime()
-          start = start.getTime()
-          end = end.getTime()
-          if (day > start || day < end) {
+          if (day >= start && day <= end) {
             this.schedule += 1
           }
         });
       }
+    })
+    .catch(() => {
+      this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+      this.$router.push({name: 'login'})
     })
   },
   methods: {
@@ -86,6 +91,9 @@ export default {
       let today = day.getFullYear().toString() + "년 " + (day.getMonth() + 1).toString() + "월 " + day.getDate().toString() + "일"
       return today
     },
+    toSchedule () {
+      this.$router.push({name: 'schedule'})
+    }
   },
 }
 </script>
@@ -181,6 +189,7 @@ export default {
       -ms-flex-direction: column;
       padding: 20px;
       text-align: left;
+      cursor: pointer;
       @media screen and (max-width: 768px) {
         margin-top: 20px;
         height: 110px;

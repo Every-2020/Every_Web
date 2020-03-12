@@ -46,8 +46,9 @@ export default {
         this.load = false
       }
     })
-    .catch( error => {
-      console.log(error)
+    .catch(() => {
+      this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+      this.$router.push({name: 'login'})
     })
     setTimeout(() => {
       window.scrollTo(0, this.$cookie.get('bamboo'))    
@@ -118,8 +119,9 @@ export default {
             window.scrollTo(0, 0)
           }
         })
-        .catch( error => {
-          console.log(error)
+        .catch(() => {
+          this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+          this.$router.push({name: 'login'})
         })
       }, 100);
     }
