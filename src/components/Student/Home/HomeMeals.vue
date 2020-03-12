@@ -219,7 +219,7 @@ export default {
         -ms-overflow-style: none;
         scrollbar-width: none;
         @media screen and (min-width: 768px) {
-          font-size: 16px;
+          font-size: 15px;
         }
         &::-webkit-scrollbar {
           display: none;
