@@ -26,7 +26,15 @@
             <span v-if="idx === 2">입력하신 학교는 존재하지 않습니다.</span>
           </div>
           <div class="register_popup_box_item_2" v-if="idx === 3">
-            <div @click="onSelect(index)" :class="{ 'first' : index % 2 === 1, 'second' : index % 2 === 0 }" class="school" :id="item.school_id" v-for="(item, index) in schools" :key="index">
+            <div class="school first" v-if="load">
+              <div class="school_load_title loading"></div>
+              <div class="school_load_content loading"></div>
+            </div>
+            <div class="school second" v-if="load">
+              <div class="school_load_title loading"></div>
+              <div class="school_load_content loading"></div>
+            </div>
+            <div v-else @click="onSelect(index)" :class="{ 'second' : index % 2 === 1, 'first' : index % 2 === 0 }" class="school" :id="item.school_id" v-for="(item, index) in schools" :key="index">
               <div class="school_name">
                 <span class="school_name_title">학교명</span>
                 <span class="school_name_name">{{ item.school_name }}</span>
@@ -55,7 +63,8 @@ export default {
       schools: {},
       school: '',
       school_input: '',
-      school_id: ''
+      school_id: '',
+      load: true
     }
   },
   props: {
@@ -74,12 +83,15 @@ export default {
       this.idx = 1
     },
     onSubmit () {
+      this.load = true
       axios.get(`${this.url}/school?query=${this.school_input}`)
       .then( response => { 
         this.schools = response.data.data.schools
         this.idx = 3
         if (response.data.data.schools.length === 0) {
           this.idx = 2
+        } else {
+          this.load = false
         }
       })
       .catch(() => {
@@ -97,6 +109,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/animation.scss";
+
 .register_student {
   display: flex;
   display: -webkit-flex;
@@ -219,7 +233,6 @@ export default {
       display: -webkit-flex;
       flex-grow: 1;
       margin-top: 20px;
-      overflow-y: scroll;
       &_1 {
         justify-content: center;
         display: flex;
@@ -248,6 +261,11 @@ export default {
         padding-left: 20px;
         padding-right: 20px;
         padding-top: 5px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
   }
@@ -273,17 +291,23 @@ export default {
     }
   }
 }
-.first {
+.second {
   float: right;
   @media screen and (max-width: 767px) {
     float: none;
   }
 }
-.second {
+.first {
   float: left;
   @media screen and (max-width: 767px) {
     float: none;
   }
+}
+.loading {
+  animation: loading 2s infinite ease-in-out;
+  -webkit-animation: loading 2s infinite ease-in-out;
+  -o-animation: loading 2s infinite ease-in-out;
+  -moz-animation: loading 2s infinite ease-in-out;
 }
 .school {
   width: 48%;
@@ -304,6 +328,19 @@ export default {
   @media screen and (max-width: 767px) {
     width: 100%;
     max-width: 400px;
+  }
+  &_load {
+    &_title {
+      border-radius: 10px;
+      height: 10px;
+      width: 70%;
+    }
+    &_content {
+      margin-top: 20px;
+      border-radius: 10px;
+      height: 10px;
+      width: 40%;
+    }
   }
 }
 .school_name {
