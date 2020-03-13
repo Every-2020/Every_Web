@@ -54,18 +54,17 @@ export default {
       .then( response => { 
         if (response.status === 200) {
           this.$swal('환영합니다!','로그인에 성공하였습니다.','success')
-          this.$store.state.login = true
           if (response.data.data.worker_idx) {
-            this.$store.state.idx = response.data.data.worker_idx
-            this.$store.state.identity = "worker"
+            this.$cookie.set('idx', response.data.data.worker_idx, { expires: '12h' })
+            this.$cookie.set('identity', 'worker', { expires: '12h' })
           } else {
-            this.$store.state.identity = "student"
-            this.$store.state.idx = response.data.data.student_idx
+            this.$cookie.set('identity', 'student', { expires: '12h' })
+            this.$cookie.set('idx', response.data.data.student_idx, { expires: '12h' })
           }
           this.$cookie.delete('access')
           this.$cookie.set('access', response.data.data['x-access-token'], { expires: '12h' })
           axios.defaults.headers.common['token'] = response.data.data['x-access-token']
-          if (this.$store.state.identity === "student") this.$router.push({ name: 'student' })
+          this.$router.push({ path: '/' })
         }
       })
       .catch(() => {

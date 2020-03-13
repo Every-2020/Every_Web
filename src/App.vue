@@ -20,13 +20,7 @@ export default {
     }
   },
   mounted() {
-    // if (this.$cookie.get('access')) {
-    //   console.log(this.$cookie.get('access'));
-      axios.defaults.headers.common['token'] = this.$cookie.get('access')
-    //   this.$router.push({ name: 'bamboo' })
-    // } else {
-      // this.$router.push({ name: 'login' })
-    // }
+    axios.defaults.headers.common['token'] = this.$cookie.get('access')
     //Scroll Cookie Delete
     this.$cookie.delete('bamboo')
     //IE Check

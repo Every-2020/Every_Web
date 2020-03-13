@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     idx: function () {
-      return this.$store.getters.getIdx
+      return parseInt(this.$cookie.get('idx'))
     }
   },
   mounted() {

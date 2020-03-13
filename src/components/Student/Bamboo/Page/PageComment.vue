@@ -68,13 +68,13 @@ export default {
       editing: false,
       edit_idx: '',
       edit_name: '',
-      more: []
+      more: [],
     }
   },
   props: ['idx', 'refresh'],
   computed: {
     my_idx: function () {
-      return this.$store.getters.getIdx
+      return parseInt(this.$cookie.get('idx'))
     }
   },
   watch: {
@@ -296,6 +296,9 @@ export default {
     margin-top: 3px;
   }
   &_load {
+    &_box {
+      width: 100% !important;
+    }
     &_title {
       width: 50px;
       background: rgb(216, 216, 216);
@@ -304,14 +307,14 @@ export default {
     }
     &_first {
       margin-top: 10px;
-      width: 170px;
+      width: 80%;
       background: rgb(223, 223, 223);
       border-radius: 10px;
       height: 13px;
     }
     &_second {
       margin-top: 10px;
-      width: 120px;
+      width: 60%;
       background: rgb(223, 223, 223);
       border-radius: 10px;
       height: 13px;

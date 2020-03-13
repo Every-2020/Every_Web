@@ -7,15 +7,18 @@
             <img @click="refresh" src="../../assets/logo.png" alt="logo">
           </div>
           <div class="main_header_nav_container_route">
-            <a href="/">
+            <router-link to="/">
               <div class="router_home"></div>
-            </a>
-            <a href="/bamboo">
+            </router-link>
+            <router-link to="/bamboo">
               <div class="router_bamboo"></div>
-            </a>
-            <a href="/schedule">
+            </router-link>
+            <router-link to="/schedule">
               <div class="router_schedule"></div>
-            </a>
+            </router-link>
+            <router-link to="/more">
+              <div class="router_more"></div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -57,8 +60,8 @@ a {
   &_home {
     background: url('../../assets/student/home.png');
     background-size: cover;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     @media screen and (max-width: 450px) {
       width: 20px;
       height: 20px;
@@ -67,8 +70,8 @@ a {
   &_bamboo {
     background: url('../../assets/student/bamboo.png');
     background-size: cover;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     @media screen and (max-width: 450px) {
       width: 20px;
       height: 20px;
@@ -77,8 +80,18 @@ a {
   &_schedule {
     background: url('../../assets/student/schedule.png');
     background-size: cover;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
+    @media screen and (max-width: 450px) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  &_more {
+    background: url('../../assets/student/more.png');
+    background-size: cover;
+    width: 28px;
+    height: 28px;
     @media screen and (max-width: 450px) {
       width: 20px;
       height: 20px;

@@ -24,10 +24,52 @@ const routes = [
   {
     path: '/',
     name: '',
+    beforeEnter: (to, from, next) => {
+      if(VueCookie.get('access')) {
+        if(VueCookie.get('identity') === 'student') {
+          return next({name: 'student'});
+        }
+        return next({name: 'worker'});
+      } else {
+        return next('/login');
+      }
+    },
+  },
+  {
+    path: '/',
+    name: '',
+    component: () => import(/* */'@/views/Worker/Worker.vue'),
+    beforeEnter: (to, from, next) => {
+      if(VueCookie.get('access')) {
+        if(VueCookie.get('identity') === 'student') {
+          return next({name: 'student'});
+        }
+        return next();
+      } else {
+        return next('/login');
+      }
+    },
+    children: [
+      {
+        name: 'worker',
+        path: '',
+        meta: {
+          title: 'Every'
+        },
+        component: () => import(/* */'@/views/Worker/Home/Home.vue'),
+      },
+    ]
+  },
+  {
+    path: '/',
+    name: '',
     component: () => import(/* */'@/views/Student/Student.vue'),
     beforeEnter: (to, from, next) => {
       if(VueCookie.get('access')) {
-        return next();
+        if(VueCookie.get('identity') === 'student') {
+          return next();
+        }
+        return next({name: 'worker'});
       } else {
         return next('/login');
       }
@@ -72,6 +114,14 @@ const routes = [
           title: 'Every - 일정'
         },
         component: () => import(/* */'@/views/Student/Schedule/Schedule.vue'),
+      },
+      {
+        name: 'more',
+        path: 'more',
+        meta: {
+          title: 'Every - More'
+        },
+        component: () => import(/* */'@/views/Student/More/More.vue'),
       },
     ]
   },
