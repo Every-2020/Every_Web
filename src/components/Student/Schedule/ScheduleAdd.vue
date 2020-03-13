@@ -101,12 +101,14 @@ export default {
   height: 100%
 }
 .vdp-datepicker__calendar {
+  left: 0px;
+  top: -290px;
   @media screen and (max-width: 450px) {
     left: 0px;
     top: -275px;
   }
   @media screen and (max-width: 350px) {
-    left: -50px;
+    width: 250px !important;
   }
 }
 .vdp-datepicker {

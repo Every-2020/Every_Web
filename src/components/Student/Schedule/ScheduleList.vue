@@ -93,6 +93,8 @@ export default {
     height: 100%;
     padding: 30px 20px 30px 20px;
     overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -103,6 +105,9 @@ export default {
     }
     @media screen and (max-width: 350px) {
       padding: 20px 20px;
+    }
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   &_add {

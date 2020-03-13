@@ -314,11 +314,11 @@ export default {
             border-radius: 10px;
           }
           &:hover {
-            background-color: rgb(124, 85, 202) !important;
+            background-color: #7240D6 !important;
             color: white !important;
           }
           &.today {
-            background-color: #BD9113 !important;
+            background-color: #7240D6 !important;
           }
           span {
             font-size: 18px;
