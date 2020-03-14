@@ -77,11 +77,11 @@ export default {
     change () {
       this.$refs.i.classList.toggle('active')
       if (this.$refs.i.classList.contains('active')) {
-        document.getElementsByTagName('i')[0].style.color = "white"
+        document.getElementsByTagName('i')[0].style.color = "var(--text-color-white)"
         document.getElementsByClassName('login_box_left')[0].style.display = "flex"
         document.getElementsByClassName('login_box_right')[0].style.display = "none"
       } else {
-        document.getElementsByTagName('i')[0].style.color = "#7E40FF"
+        document.getElementsByTagName('i')[0].style.color = "var(--main-color-box-login)"
         document.getElementsByClassName('login_box_left')[0].style.display = "none"
         document.getElementsByClassName('login_box_right')[0].style.display = "flex"
       }
@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/color.scss";
 .login {
   width: 100%;
   display: flex;
@@ -126,7 +127,7 @@ export default {
     height: auto;
     overflow: hidden;
     max-width: 1042px;
-    box-shadow: 0px 0px 30px rgba(128, 128, 128, 0.507);
+    box-shadow: 0px 0px 30px var(--box-shadow-login);
     @media screen and (max-width: 767px) {
       max-width: 400px;
       min-height: 500px;
@@ -142,9 +143,9 @@ export default {
       padding-bottom: calc(50% - 60px);
       padding-left: calc(20% - 20px);
       text-align: left;
-      color: white;
+      color: var(--text-color-white);
       display: none;
-      background-color: #7E40FF;
+      background-color: var(--main-color-box-login);
       @media screen and (min-width: 768px) {
         padding-left: 40px;
         padding-bottom: 180px;
@@ -174,7 +175,7 @@ export default {
         height: 4px;
         margin-top: 5px;
         border-radius: 10px;
-        background-color: white;
+        border-color: var(--under-white);
         @media screen and (max-width: 767px) {
           height: 3px;
         }
@@ -200,7 +201,7 @@ export default {
         height: 56px;
         border-radius: 29px;
         padding: 0;
-        color: white;
+        color: var(--text-color-white);
         cursor: pointer;
         background: none;
         margin-top: 50px;
@@ -208,7 +209,7 @@ export default {
         font-size: 24px;
         font-weight: 600;
         box-sizing: border-box;
-        border: 3px solid white;
+        border: 3px solid var(--text-color-white);
         text-align: center;
         @media screen and (max-width: 767px) {
           padding-top: 10px;
@@ -219,7 +220,7 @@ export default {
     &_right {
       display: flex;
       display: -webkit-flex;
-      background-color: white;
+      background-color: var(--bg-color);
       text-align: left;
       padding-top: 86.4px;
       padding-left: 40px;
@@ -234,7 +235,7 @@ export default {
         display: -webkit-flex !important;
       }
       &_title {
-        color: #2D008A;
+        color: var(--text-color-purple);
         font-size: 36px;
         font-weight: 800;
       }
@@ -242,7 +243,7 @@ export default {
         font-size: 16px;
         font-weight: 700;
         display: block;
-        color: #2D008A;
+        color: var(--text-color-purple);
         margin-top: 5px;
         margin-bottom: 40px;
         @media screen and (max-width: 767px) {
@@ -279,7 +280,7 @@ export default {
         }
       }
       .forgot {
-        color: #4300CE;
+        color: var(--text-color-purple-blue);
         font-weight: 700;
         font-size: 14px;
         text-align: right;

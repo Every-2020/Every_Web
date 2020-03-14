@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/color.scss";
 @import "@/assets/style/common.scss";
 .slide-enter-active {
    -moz-transition-duration: 0.3s;
@@ -93,7 +94,7 @@ img, .not_select {
 .screen {
   max-width: 100%;
   min-height: 100vh;
-  background-color: #F2F2F2;
+  background-color: var(--bg-screen);
   display: flex;
   display: -webkit-flex;
   overflow: hidden;
@@ -122,6 +123,6 @@ img, .not_select {
   }
 }
 .swal2-confirm {
-  background-color: #7E40FF !important;
+  background-color: var(--main-color) !important;
 }
 </style>

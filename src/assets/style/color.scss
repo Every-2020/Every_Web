@@ -1,0 +1,26 @@
+$bg-color: #fff;
+$bg-screen: #F2F2F2;
+$main-color: #7E40FF;
+$text-color-white: white;
+$under-white: white;
+
+html.darkmode:root {
+  --bg-color: rgb(39, 39, 39);
+  --main-color: rgb(42, 14, 99);
+  --text-color-purple: rgb(214, 214, 214);
+  --text-color-purple-blue: rgb(155, 155, 155);
+  --text-color-white: rgb(197, 197, 197);
+  --bg-screen: #18191A;
+  --box-shadow-login: rgba(0, 0, 0, 0);
+  --main-color-box-login: rgb(29, 29, 29);
+}
+:root {
+  --bg-screen: #F2F2F2;
+  --main-color: #7E40FF;
+  --text-color-purple: #2D008A;
+  --text-color-purple-blue: #4300CE;
+  --text-color-white: white;
+  --bg-color: #fff;
+  --box-shadow-login: rgba(128, 128, 128, 0.507);
+  --main-color-box-login: #7E40FF;
+}
