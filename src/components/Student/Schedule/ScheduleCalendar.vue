@@ -319,6 +319,7 @@ export default {
             color: white !important;
           }
           &.today {
+            color: white !important;
             background-color: #7240D6 !important;
           }
           span {

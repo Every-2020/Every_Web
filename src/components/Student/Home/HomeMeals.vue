@@ -169,7 +169,7 @@ export default {
       -webkit-transform: rotate(180deg);
       cursor: pointer;
       margin-right: 10px;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 769px) {
         display: none;
       }
     }
@@ -178,7 +178,7 @@ export default {
       height: 20px;
       width: 20px;
       margin-left: 10px;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 769px) {
         display: none;
       }
     }
@@ -221,7 +221,7 @@ export default {
         display: -webkit-flex;
         justify-content: center;
         align-items: center;
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 769px) {
           font-size: 15px;
         }
         &::-webkit-scrollbar {
@@ -232,21 +232,21 @@ export default {
     &_1 {
       background-color: #611CEE;
       display: none;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 769px) {
         display: block !important;
       }
     }
     &_2 {
       background-color: #4904D8;
       display: block;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 769px) {
         display: block !important;
       }
     }
     &_3 {
       background-color: #3A00B4;
       display: none;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 769px) {
         display: block !important;
       }
     }

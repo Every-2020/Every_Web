@@ -1,25 +1,25 @@
 <template>
-  <div class="schedule_add">
-    <div @click="close" class="schedule_add_area"></div>
-    <div class="schedule_add_box">
-      <div class="schedule_add_title">
+  <div class="schedule_edit">
+    <div @click="close" class="schedule_edit_area"></div>
+    <div class="schedule_edit_box">
+      <div class="schedule_edit_title">
         <span>일정 제목</span>
       </div>
-      <input class="schedule_add_title_input" type="text" v-model="title" placeholder="일정 제목을 입력해주세요." maxlength="20">
-      <div class="schedule_add_title">
+      <input class="schedule_edit_title_input" type="text" v-model="title" placeholder="일정 제목을 입력해주세요." maxlength="20">
+      <div class="schedule_edit_title">
         <span>일정 내용</span>
       </div>
-      <input class="schedule_add_title_input" type="text" v-model="content" placeholder="일정에 관한 세부적인 내용을 입력해주세요." maxlength="150">
-      <div class="schedule_add_title">
+      <input class="schedule_edit_title_input" type="text" v-model="content" placeholder="일정에 관한 세부적인 내용을 입력해주세요." maxlength="150">
+      <div class="schedule_edit_title">
         <span>일정 시작 날짜</span>
       </div>
       <datepicker :format="format" v-model="start"></datepicker>
-      <div class="schedule_add_title">
+      <div class="schedule_edit_title">
         <span>일정 종료 날짜</span>
       </div>
       <datepicker :format="format" v-model="end"></datepicker>
       <div class="schedule_btn">
-        <div @click="add" class="schedule_btn_com">추가</div>
+        <div @click="edit" class="schedule_btn_com">수정</div>
         <div @click="close" class="schedule_btn_can">취소</div>
       </div>
     </div>
@@ -31,30 +31,23 @@ import axios from 'axios'
 import server from '@/models/server'
 import Datepicker from 'vuejs-datepicker'
 export default {
-  props: ['day'],
+  props: ['event'],
   data() {
     return {
-      start: '',
-      end: '',
-      title: '',
-      content: '',
       format: 'yyyy-MM-dd',
-      url: server
+      url: server,
+      start: new Date(this.event.start_date),
+      end: new Date(this.event.end_date),
+      title: this.event.title,
+      content: this.event.content,
+      idx: this.event.idx
     }
   },
   components: { Datepicker },
-  mounted() {
-    document.getElementsByTagName('body')[0].classList.add('not_scroll')
-    this.start = new Date(this.day)
-    this.end = new Date (this.day)
-  },
-  destroyed() {
-    document.getElementsByTagName('body')[0].classList.remove('not_scroll')
-  },
   methods: {
-    add() {
+    edit() {
       if (this.title && this.content && this.start <= this.end) {
-        axios.post(`${this.url}/schedule`, {
+        axios.put(`${this.url}/schedule/${this.idx}`, {
           title: this.title,
           content: this.content,
           start_date: this.getDate(this.start),
@@ -62,7 +55,7 @@ export default {
         })
         .then((response) => {
           if (response.data.status === 200) {
-            this.$emit('onAdd')
+            this.$emit('onEdit')
           }
         })
         .catch(() => {
@@ -168,7 +161,7 @@ export default {
     align-items: center;
   }
 }
-.schedule_add {
+.schedule_edit {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -179,7 +172,7 @@ export default {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.3);
-  z-index: 101;
+  z-index: 103;
   padding: 15px;
   &_area {
     position: fixed;
@@ -187,14 +180,14 @@ export default {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 102;
+    z-index: 104;
   }
   &_box {
     width: 100%;
     height: 570px;
     max-width: 400px;
     box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.123);
-    z-index: 103;
+    z-index: 105;
     background: white;
     display: flex;
     display: -webkit-flex;

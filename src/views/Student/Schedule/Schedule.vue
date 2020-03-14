@@ -46,22 +46,12 @@ export default {
   },
   watch: {
     selected: function () {
-      this.filteredEvent = []
-      this.eventList.forEach(event => {
-        let select = this.selected.getTime()
-        let start = new Date(event.start_date + " 00:00:00.000")
-        let end = new Date(event.end_date + " 23:59:59.000")
-
-        start = start.getTime()
-        end = end.getTime()
-        if (select >= start && select < end) {
-          this.filteredEvent.push(event)
-        }
-      });
+      this.getThis()
     }
   },
   mounted () {
     document.getElementsByClassName('router_home')[0].classList.remove('active_home')
+    document.getElementsByClassName('router_more')[0].classList.remove('active_more')
     document.getElementsByClassName('router_bamboo')[0].classList.remove('active_bamboo')
     document.getElementsByClassName('router_schedule')[0].classList.add('active_schedule')
     axios.get(`${this.url}/schedule`)
@@ -89,6 +79,20 @@ export default {
     ScheduleList
   },
   methods: {
+    getThis () {
+      this.filteredEvent = []
+      this.eventList.forEach(event => {
+        let select = this.selected.getTime()
+        let start = new Date(event.start_date + " 00:00:00.000")
+        let end = new Date(event.end_date + " 23:59:59.000")
+
+        start = start.getTime()
+        end = end.getTime()
+        if (select >= start && select < end) {
+          this.filteredEvent.push(event)
+        }
+      });
+    },
     dayPick (day) {
       this.selected = day
       let month = day.getMonth() + 1
@@ -102,7 +106,25 @@ export default {
       this.selectedDay = day.getFullYear() + "-" + month + "-" + date
     },
     refresh () {
-      history.go(0)
+      axios.get(`${this.url}/schedule`)
+      .then(response => {
+        if (response.data.status === 200) {
+          this.eventList = response.data.data.schedules
+          for(let event of this.eventList) {
+            this.events.push({
+              categoryId: 1,
+              start: event.start_date,
+              end: event.end_date,
+              title: event.title
+            })
+          }
+          this.getThis()
+        }
+      })
+      .catch(() => {
+        this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+        this.$router.push({name: 'login'})
+      })
     }
   },
 }

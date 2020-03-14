@@ -5,7 +5,7 @@
         <img class="schedule_list_add_img" src="../../../assets/student/schedule/add.png" alt="add">
         <span>일정 추가하기</span>
       </div>
-      <div class="schedule_list_box column" v-for="(event, index) in events" :key="index">
+      <div @click="view(event)" class="schedule_list_box column" v-for="(event, index) in events" :key="index">
         <img class="calendar_" src="../../../assets/student/schedule/calendar_.png" alt="calendar_">
         <div class="schedule_list_title">
           <img src="../../../assets/student/schedule/calendar.png" alt="calendar">
@@ -28,21 +28,37 @@
       @onAdd="refresh"
       @close="close"
     />
+    <schedule-view
+      v-if="show"
+      :event="select"
+      :date="selectDate"
+      @onBack="back"
+      @onRefresh="refresh"
+    />
   </div>
 </template>
 
 <script>
+import ScheduleView from '@/components/Student/Schedule/ScheduleView.vue'
 import ScheduleAdd from '@/components/Student/Schedule/ScheduleAdd.vue'
 export default {
   data() {
     return {
-      add: false
+      add: false,
+      select: '',
+      show: false,
+      selectDate: ''
     }
   },
   name: 'ScheduleList',
   props: ['events', 'selectDay'],
-  components: { ScheduleAdd },
+  components: { ScheduleAdd, ScheduleView },
   methods: {
+    view (event) {
+      this.selectDate = this.getDate(event.start_date, event.end_date)
+      this.select = event
+      this.show = true
+    },
     addEvent() {
       this.add = true
     },
@@ -71,6 +87,7 @@ export default {
       this.$emit('Refresh')
     },
     close () {
+      this.show = false
       this.add = false
     },
     scroll () {
@@ -80,6 +97,9 @@ export default {
       } else {
         document.getElementsByClassName('schedule_list_btn')[0].classList.add('none')
       }
+    },
+    back () {
+      this.show = false
     }
   },
 }
