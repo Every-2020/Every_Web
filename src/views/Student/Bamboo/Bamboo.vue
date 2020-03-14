@@ -15,6 +15,7 @@ export default {
   },
   destroyed() {
     document.getElementsByClassName('screen')[0].style.backgroundColor = "#F2F2F2"
+    this.$cookie.delete('bamboo')
   },
   methods: {
     onPageView (idx) {

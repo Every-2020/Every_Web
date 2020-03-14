@@ -1,6 +1,6 @@
 <template>
   <div class="schedule_list">
-    <div class="schedule_list_area">
+    <div @scroll.passive="scroll" class="schedule_list_area">
       <div @click="addEvent" class="schedule_list_add schedule_list_box">
         <img class="schedule_list_add_img" src="../../../assets/student/schedule/add.png" alt="add">
         <span>일정 추가하기</span>
@@ -15,6 +15,12 @@
           <span>{{getDate(event.start_date, event.end_date)}}</span>
         </div>
       </div>
+    </div>
+    <div @click="addEvent" class="schedule_list_btn none">
+      <img class="schedule_list_btn_img" src="../../../assets/student/schedule/add.png" alt="add">
+    </div>
+    <div @click="addEvent" class="schedule_list_btn_2">
+      <img class="schedule_list_btn_img" src="../../../assets/student/schedule/add.png" alt="add">
     </div>
     <schedule-add
       v-if="add"
@@ -66,12 +72,23 @@ export default {
     },
     close () {
       this.add = false
+    },
+    scroll () {
+      let el = document.getElementsByClassName('schedule_list_area')[0]
+      if (el.scrollTop >= 100) {
+        document.getElementsByClassName('schedule_list_btn')[0].classList.remove('none')
+      } else {
+        document.getElementsByClassName('schedule_list_btn')[0].classList.add('none')
+      }
     }
   },
 }
 </script>
 
 <style lang="scss">
+.none {
+  display: none !important;
+}
 .column {
   flex-direction: column;
   -ms-flex-direction: column;
@@ -86,28 +103,84 @@ export default {
   }
 }
 .schedule_list {
+  padding: 30px 20px 30px 20px;
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 450px) {
+    padding: 10px 20px;
+  }
+  @media screen and (max-width: 350px) {
+    padding: 10px 15px;
+  }
   &_area {
     width: 100%;
     height: 100%;
-    padding: 30px 20px 30px 20px;
-    overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     -ms-flex-direction: column;
+    position: relative;
     align-items: center;
-    @media screen and (max-width: 450px) {
-      padding: 20px 40px;
-    }
-    @media screen and (max-width: 350px) {
-      padding: 20px 20px;
+    @media screen and (min-width: 980px) {
+      overflow-y: scroll;
     }
     &::-webkit-scrollbar {
       display: none;
+    }
+  }
+   &_btn {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.123);
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 980px) {
+      display: none !important;
+    }
+    img {
+      width: 40px;
+    }
+  }
+  &_btn_2 {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.123);
+    display: none;
+    @media screen and (max-width: 980px) {
+      right: 150px;
+      position: fixed;
+      bottom: 70px;
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (max-width: 767px) {
+      right: 70px;
+    }
+    @media screen and (max-width: 450px) {
+      right: 40px;
+      bottom: 40px;
+    }
+    @media screen and (max-width: 350px) {
+      right: 40px;
+      bottom: 40px;
+    }
+    img {
+      width: 40px;
     }
   }
   &_add {
@@ -116,20 +189,12 @@ export default {
     font-size: 20px;
     align-items: center;
     font-weight: 800;
-    @media screen and (max-width: 450px) {
-      font-size: 18px;
-    }
-    @media screen and (max-width: 350px) {
-      font-size: 17px;
+    display: block;
+    @media screen and (max-width: 980px) {
+      display: none !important;
     }
     &_img {
       width: 28px;
-      @media screen and (max-width: 450px) {
-        width: 24px;
-      }
-      @media screen and (max-width: 350px) {
-        width: 20px;
-      }
     }
     span {
       margin-left: 10px;
@@ -150,8 +215,12 @@ export default {
     text-align: left;
     padding: 20px;
     position: relative;
+    @media screen and (max-width: 980px) {
+      max-width: 450px;
+    }
     @media screen and (max-width: 450px) {
       width: 100%;
+      max-width: 350px;
       height: 70px;
     }
   }

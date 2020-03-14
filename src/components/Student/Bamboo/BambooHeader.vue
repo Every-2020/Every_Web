@@ -7,8 +7,11 @@
       <div class="post_header_content_title">
         <span>#{{ idx }}번째 이야기</span>
       </div>
+      <div class="post_header_content_date">
+        <span :title="created.substring(0, 19)">{{ date }}</span>
+      </div>
       <div class="post_header_content_time">
-        <span :title="created.substring(0, 19)">{{ time }}</span>
+        <span>{{ time }}</span>
       </div>
     </div>
   </div>
@@ -19,7 +22,18 @@ export default {
   props: {
     idx: Number,
     time: String,
-    created: String
+    created: String,
+  },
+  data() {
+    return {
+      date: ''
+    }
+  },
+  mounted() {
+    let day = new Date(this.created)
+    let today = day.getFullYear().toString() + "년 " + (day.getMonth() + 1).toString() + "월 " + day.getDate().toString() + "일"
+    
+    this.date = today
   },
 }
 </script>
@@ -27,12 +41,15 @@ export default {
 <style lang="scss">
 .post_header {
   width: 100%;
-  height: 45px;
+  height: 60px;
   display: flex;
   display: -webkit-flex;
   &_img {
     img {
-      width: 50px;
+      width: 60px;
+      @media screen and (max-width: 450px) {
+        width: 50px;
+      }
     }
   }
   &_content {
@@ -47,15 +64,20 @@ export default {
       font-weight: 800;
       font-size: 18px;
     }
-    &_time {
-      color: gray;
-      font-size: 16px;
+    &_date {
+      font-size: 15px;
+      color: black;
       span {
         cursor: pointer;
         &:hover {
           text-decoration: underline;
         }
       }
+    }
+    &_time {
+      color: black;
+      font-size: 14px;
+      font-weight: 700;
     }
   }
   

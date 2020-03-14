@@ -161,6 +161,7 @@ export default {
     onClick(day) {
       const Day = new Date(this.selectedYear + this.selectedMonthName + day)
       this.$emit('onClick', Day)
+      this.today = Day
     }
   },
   props: {

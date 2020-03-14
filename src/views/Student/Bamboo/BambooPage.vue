@@ -10,8 +10,11 @@
               <div class="page_box_content_header_title">
                 <span>#{{ idx }}번째 이야기</span>
               </div>
+              <div class="page_box_content_header_date">
+                <span :title="items.created_at.substring(0, 19)">{{ getDate(items.created_at) }}</span>
+              </div>
               <div class="page_box_content_header_time">
-                <span :title="items.created_at.substring(0, 19)">{{ postTimeCalc(items.created_at) }}</span>
+                <span>{{ postTimeCalc(items.created_at) }}</span>
               </div>
             </div>
           </div>
@@ -108,6 +111,12 @@ export default {
     },
     refreshComment () {
       this.refresh += 1
+    },
+    getDate (date) {
+      let day = new Date(date)
+      let today = day.getFullYear().toString() + "년 " + (day.getMonth() + 1).toString() + "월 " + day.getDate().toString() + "일"
+    
+      return today
     }
   }
 }
@@ -197,9 +206,8 @@ export default {
             font-size: 20px;
           }
         }
-        &_time {
+        &_date {
           font-size: 16px;
-          color: gray;
           span {
             cursor: pointer;
             &:hover {
@@ -207,11 +215,18 @@ export default {
             }
           }
         }
+        &_time {
+          font-size: 15px;
+          font-weight: 700;
+        }
         &_profile {
           display: flex;
           display: -webkit-flex;
           margin-left: 20px;
           align-items: center;
+          @media screen and (max-width: 450px) {
+            margin-left: 10px;
+          }
         }
       }
       &_main {

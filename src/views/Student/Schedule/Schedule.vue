@@ -1,5 +1,5 @@
 <template>
-  <div class="schedule">
+  <div class="schedule" v-on:scroll.passive="scroll">
     <div class="schedule_box">
       <div class="schedule_box_left">
         <schedule-calendar
@@ -140,13 +140,14 @@ export default {
     @media screen and (max-width: 980px) {
       flex-direction: column;
       -ms-flex-direction: column;
-      height: 1000px;
+      height: auto;
+      min-height: 1000px;
     }
     @media screen and (max-width: 450px) {
-      height: 900px;
+      min-height: 900px;
     }
     @media screen and (max-width: 350px) {
-      height: 800px;
+      min-height: 800px;
     }
     &_left {
       position: relative;
@@ -172,6 +173,7 @@ export default {
       height: 100%;
       @media screen and (max-width: 980px) {
         width: 100%;
+        height: auto;
       }
     }
   }

@@ -110,20 +110,8 @@ export default {
     },
     refresh () {
       this.add = false
-      setTimeout(() => {
-        axios.get(`${this.url}/bamboo/post`)
-        .then( response => {
-          if (response.status === 200) {
-            this.posts = response.data.data.posts
-            this.$cookie.delete('bamboo')
-            window.scrollTo(0, 0)
-          }
-        })
-        .catch(() => {
-          this.$swal('오류','로그인 시간이 만료되었습니다.','error')
-          this.$router.push({name: 'login'})
-        })
-      }, 100);
+      this.$cookie.delete('bamboo')
+      history.go(0)
     }
   },
 }

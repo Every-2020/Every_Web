@@ -25,7 +25,7 @@
         <form name="login" @submit.prevent="onSubmit">
           <input name="email" type="email" v-model="email" placeholder="이메일">
           <input name="pw" type="password" v-model="pw" placeholder="비밀번호">
-          <span class="forgot">비밀번호를 잊으셨나요?</span>
+          <span @click="forgot" class="forgot">비밀번호를 잊으셨나요?</span>
           <button type="submit">로그인</button>
         </form>
       </div>
@@ -85,6 +85,9 @@ export default {
         document.getElementsByClassName('login_box_left')[0].style.display = "none"
         document.getElementsByClassName('login_box_right')[0].style.display = "flex"
       }
+    },
+    forgot () {
+      this.$swal('오류','현재 개발 중입니다.','error')
     }
   },
 }

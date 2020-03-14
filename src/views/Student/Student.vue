@@ -34,7 +34,11 @@ export default {
   name: 'student',
   methods: {
     refresh () {
-      history.go(0)
+      if (this.$router.history.current.name === "student") {
+        history.go(0)
+      } else {
+        this.$router.push({name: 'student'}) 
+      }
     }
   }
 }
@@ -136,7 +140,7 @@ a {
         display: -webkit-flex;
         justify-content: center;
         align-items: center;
-        max-width: 800px;
+        // max-width: 800px;
         color: white;
         &_logo {
           flex-grow: 1;
