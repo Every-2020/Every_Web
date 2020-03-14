@@ -53,6 +53,7 @@ export default {
   mounted() {
     document.getElementsByClassName('router_home')[0].classList.add('active_home')
     document.getElementsByClassName('router_bamboo')[0].classList.remove('active_bamboo')
+    document.getElementsByClassName('router_more')[0].classList.remove('active_more')
     document.getElementsByClassName('router_schedule')[0].classList.remove('active_schedule')
     axios.get(`${this.url}/member/student/${this.idx}`)
     .then(response => {

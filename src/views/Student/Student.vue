@@ -60,6 +60,10 @@ a {
   background: url('../../assets/student/scheduleSelect.png') !important;
   background-size: cover !important;
 }
+.active_more {
+  background: url('../../assets/student/moreSelect.png') !important;
+  background-size: cover !important;
+}
 .router {
   &_home {
     background: url('../../assets/student/home.png');
