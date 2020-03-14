@@ -11,7 +11,7 @@
         </div>
         <div class="home_right_meals_box_content" v-if="meals[0]" v-html="meals[0].meal_name"></div>
         <div class="home_right_meals_box_content" v-else>급식이 없습니다.</div>
-        <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave.png" alt="wave">
+        <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave1.png" alt="wave">
       </div>
       <div class="home_right_meals_2 home_right_meals_box">
         <div class="home_right_meals_box_title">
@@ -29,7 +29,7 @@
         </div>
         <div class="home_right_meals_box_content" v-if="meals[2]" v-html="meals[2].meal_name"></div>
         <div class="home_right_meals_box_content" v-else>급식이 없습니다.</div>
-        <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave2.png" alt="wave">
+        <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave3.png" alt="wave">
         <img class="moon_star" src="../../../assets/student/home/star.png" alt="star">
       </div>
       <img @click="next" class="home_right_meals_right" src="../../../assets/student/home/meal_next.png" alt="next">
@@ -260,9 +260,8 @@ export default {
 }
 .moon_star {
   position: absolute;
-  top: -15px;
+  top: 10px;
   left: 20px;
   width: 80%;
-
 }
 </style>
