@@ -102,8 +102,16 @@ const routes = [
             meta: {
               title: 'Every - 게시물'
             },
-            props: (route) => ({ idx: route.query.idx }),
+            props: (route) => ({ idx: route.query.idx, hit: route.query.hit }),
             component: () => import(/* */'@/views/Student/Bamboo/BambooPage.vue')
+          },
+          {
+            name: 'bambooHit',
+            path: 'hit',
+            meta: {
+              title: 'Every - 게시물'
+            },
+            component: () => import(/* */'@/views/Student/Bamboo/BambooHit.vue')
           }
         ]
       },

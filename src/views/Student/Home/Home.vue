@@ -18,7 +18,7 @@
         <span class="home_left_schedule_today" v-if="schedule === 0">오늘은 일정이 없습니다.</span>
         <span class="home_left_schedule_today" v-else>{{schedule}}개의 일정이 있습니다.</span>
       </div>
-      <div class="home_left_bamboo">
+      <div @click="hitPost" class="home_left_bamboo">
         <span>오늘의 대나무숲 인기 게시글을<br><b>확인하세요!</b></span>
         <img class="home_left_bamboo_img" src="../../../assets/student/home/bamboo.png" alt="bamboo">
         <img class="home_left_bamboo_next" src="../../../assets/student/home/next.png" alt="next">
@@ -93,6 +93,9 @@ export default {
     },
     toSchedule () {
       this.$router.push({name: 'schedule'})
+    },
+    hitPost () {
+      this.$router.push({path: `/bamboo/hit`})
     }
   },
 }

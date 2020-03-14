@@ -92,10 +92,7 @@ export default {
       })
     }
   },
-  components: {
-    CommentEdit
-  },
-  mounted() {
+  created() {
     axios.get(`${this.url}/bamboo/reply?post=${this.idx}`)
     .then(response => {
       if (response.data.status === 200) {
@@ -103,9 +100,12 @@ export default {
         for(let comment of response.data.data.replies) {
           this.getUser(comment, comment.student_idx)
         }
-        this.loading = false 
+        this.loading = false
       }
     })
+  },
+  components: {
+    CommentEdit
   },
   methods: {
     onDelete (comment) {

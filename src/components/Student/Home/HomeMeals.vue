@@ -211,13 +211,16 @@ export default {
       &_content {
         color: white;
         font-size: 14px;
-        text-align: center;
         font-weight: 600;
         line-height: 25px;
         height: 140px;
         overflow-y: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
         @media screen and (min-width: 768px) {
           font-size: 15px;
         }
