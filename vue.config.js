@@ -9,7 +9,8 @@ module.exports = {
   },
 
   devServer: {
-    overlay: false
+    overlay: false,
+    port: 9000
   },
 
   // outputDir: 'docs'
