@@ -103,6 +103,7 @@ export default {
   align-items: center;
   overflow: hidden;
   padding: 40px 40px;
+  background-color: #F2F2F2;
   @media screen and (max-width: 350px) {
     padding: 0 5px;
   }

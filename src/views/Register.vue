@@ -49,6 +49,7 @@ export default {
   display: -webkit-flex;
   justify-content: center;
   align-items: center;
+  background-color: #F2F2F2;
   padding: 40px;
   @media screen and (max-width: 350px) {
     padding: 0 5px;
