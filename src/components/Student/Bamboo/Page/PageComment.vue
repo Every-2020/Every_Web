@@ -25,9 +25,6 @@
             </div>
             <span class="comment_area_box_content_text">{{ comment.content }}</span>
           </div>
-        </div>
-        <div class="comment_area_more" v-if="comment.student_idx === my_idx">
-          <img class="comment_area_more_img" @click="onClick(comment)" src="../../../../assets/student/bamboo/more.png" alt="more">
           <div class="comment_more" v-if="comment.edit">
             <div @click="onClose(comment)" class="comment_more_area"></div>
             <div class="comment_more_box">
@@ -41,6 +38,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="comment_area_more" v-if="comment.student_idx === my_idx">
+          <img class="comment_area_more_img" @click="onClick(comment)" src="../../../../assets/student/bamboo/more.png" alt="more">
         </div>
       </div>
       <div class="comment_area_exp">
@@ -232,8 +232,9 @@ export default {
     padding: 8px;
     z-index: 200;
     border-radius: 5px;
+    width: 140px;
     background-color: #F8F8F8;
-    right: 10px;
+    right: -40px;
     top: 15px;
     &_edit {
       display: flex;

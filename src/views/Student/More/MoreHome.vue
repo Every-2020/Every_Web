@@ -77,7 +77,6 @@ export default {
 <style lang="scss">
 .setting_img {
   width: 30px;
-  height: 30px;
   align-self: end;
   cursor: pointer;
   @media screen and (max-width: 768px) {
@@ -85,7 +84,6 @@ export default {
   }
   @media screen and (max-width: 450px) {
     width: 25px;
-    height: 25px;
   }
 }
 .more {

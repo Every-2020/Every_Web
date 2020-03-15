@@ -83,6 +83,7 @@ export default {
       background-color: rgba(231, 231, 231, 0.877);
       cursor: pointer;
       width: 10px;
+      padding: 0;
       height: 10px;
       &:focus {
         outline: none;
