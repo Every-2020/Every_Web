@@ -124,12 +124,30 @@ const routes = [
         component: () => import(/* */'@/views/Student/Schedule/Schedule.vue'),
       },
       {
-        name: 'more',
+        name: '',
         path: 'more',
         meta: {
           title: 'Every - More'
         },
         component: () => import(/* */'@/views/Student/More/More.vue'),
+        children: [
+          {
+            name: 'more',
+            path: '',
+            meta: {
+              title: 'Every - More'
+            },
+            component: () => import(/* */'@/views/Student/More/MoreHome.vue'),
+          },
+          {
+            name: 'setting',
+            path: 'setting',
+            meta: {
+              title: 'Every - 설정'
+            },
+            component: () => import(/* */'@/views/Student/More/MoreSetting.vue')
+          },
+        ]
       },
     ]
   },
