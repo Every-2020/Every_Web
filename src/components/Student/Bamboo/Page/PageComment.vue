@@ -23,7 +23,7 @@
                 {{ comment['user'] }}
               </span>
             </div>
-            <span class="comment_area_box_content_text">{{ comment.content }}</span>
+            <span class="comment_area_box_content_text" v-html="comment.content.replace(/(?:\r\n|\r|\n)/g, '<br />')"></span>
           </div>
           <div class="comment_more" v-if="comment.edit">
             <div @click="onClose(comment)" class="comment_more_area"></div>

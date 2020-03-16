@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      if (this.comment) {
+      if (this.comment.replace(/\s+$/, '') != "") {
         axios.post(`${this.url}/bamboo/reply`, {
           content: this.comment,
           post: this.idx

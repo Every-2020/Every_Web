@@ -33,7 +33,7 @@ export default {
       this.$emit('onBack')
     },
     onSubmit () {
-      if (this.content) {
+      if (this.content.replace(/\s+$/, '') != "") {
         axios.post(`${this.url}/bamboo/post`, {
           content: this.content,
         })

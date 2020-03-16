@@ -5,10 +5,10 @@
       <div class="post_content">
         <bamboo-header :created="post.created_at" :time="postTimeCalc(post.created_at)" :idx="post.idx"></bamboo-header>
         <div :class="{'post_content_main' : true, 'post_content_main_hidden' : postHide(post.content)}">
-          <span class="post_content_main_text">{{ postLength(post.content) }}</span>
+          <span class="post_content_main_text" v-html="postLength(post.content)"></span>
           <span class="post_content_main_hide">...</span>
           <span @click="postSeeMore(index)" class="post_content_main_more">더 보기</span>
-          <span class="post_content_main_text_hide">{{ postSplit(post.content) }}</span>
+          <span class="post_content_main_text_hide" v-html="postSplit(post.content)"></span>
         </div>
       </div>
       <bamboo-footer @onPageView="onPageView" :idx="post.idx"></bamboo-footer>
@@ -88,7 +88,7 @@ export default {
     },
     postLength (content) {
       if (content.length > 250) {
-          return content.substring(0, 250)
+          return content.substring(0, 250).replace(/(?:\r\n|\r|\n)/g, '<br />')
       }
       return content;
     },
@@ -96,7 +96,7 @@ export default {
       document.getElementsByClassName('post_content_main')[idx].classList.remove('post_content_main_hidden')
     },
     postSplit (content) {
-      return content.substring(250)
+      return content.substring(250).replace(/(?:\r\n|\r|\n)/g, '<br />')
     },
     onPageView (idx) {
       this.$cookie.set('bamboo', window.scrollY)
@@ -168,7 +168,8 @@ export default {
   }
   background-color: rgb(252, 252, 252);
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   position: relative;
   display: flex;
   display: -webkit-flex;

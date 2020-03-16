@@ -8,22 +8,25 @@
             <img src="../../../assets/student/bamboo/profile.png" alt="profile" class="profile">
             <div class="page_box_content_header_items">
               <div class="page_box_content_header_title">
-                <span>#{{ idx }}번째 이야기</span>
+                <span v-if="load">불러오는 중</span>
+                <span v-else>#{{ idx }}번째 이야기</span>
               </div>
               <div class="page_box_content_header_date">
-                <span :title="items.created_at.substring(0, 19)">{{ getDate(items.created_at) }}</span>
+                <span v-if="load">불러오는 중</span>
+                <span v-else :title="items.created_at.substring(0, 19)">{{ getDate(items.created_at) }}</span>
               </div>
               <div class="page_box_content_header_time">
-                <span>{{ postTimeCalc(items.created_at) }}</span>
+                <span v-if="load">불러오는 중</span>
+                <span v-else>{{ postTimeCalc(items.created_at) }}</span>
               </div>
             </div>
           </div>
         </div>
         <div :class="{'page_box_content_main' : true, 'page_box_content_main_hidden' : postHide(items.content)}">
-          <span class="page_box_content_main_text">{{ postLength(items.content) }}</span>
+          <span class="page_box_content_main_text" v-html="postLength(items.content)"></span>
           <span class="page_box_content_main_hide">...</span>
           <span @click="postSeeMore(0)" class="page_box_content_main_more">더 보기</span>
-          <span class="page_box_content_main_text_hide">{{ postSplit(items.content) }}</span>
+          <span class="page_box_content_main_text_hide" v-html="postSplit(items.content)"></span>
         </div>
       </div>
       <div class="page_box_comment">
@@ -46,6 +49,7 @@ export default {
     return {
       url: server,
       refresh: 0,
+      load: true,
       items: {
         created_at: '',
         content: ''
@@ -61,6 +65,7 @@ export default {
     .then(response => {
       if (response.data.status === 200) {
         this.items = response.data.data.post
+        this.load = false
       }
     })
     .catch(() => {
@@ -99,7 +104,7 @@ export default {
     },
     postLength (content) {
       if (content.length > 250) {
-          return content.substring(0, 250)
+          return content.substring(0, 250).replace(/(?:\r\n|\r|\n)/g, '<br />')
       }
       return content;
     },
@@ -107,7 +112,7 @@ export default {
       document.getElementsByClassName('page_box_content_main')[idx].classList.remove('page_box_content_main_hidden')
     },
     postSplit (content) {
-      return content.substring(250)
+      return content.substring(250).replace(/(?:\r\n|\r|\n)/g, '<br />')
     },
     refreshComment () {
       this.refresh += 1
@@ -236,7 +241,8 @@ export default {
         overflow-y: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
-        word-break: break-all;
+        word-break: break-word;
+        white-space: pre-wrap;
         &::-webkit-scrollbar {
           display: none;
         }
