@@ -18,7 +18,7 @@
         </div>
         <div class="more_setting_content_text">
           <img src="../../../assets/student/more/birth.png" alt="birth">
-          {{ birth }}년생
+          {{ birth }}
         </div>
       </div>
       <div @click="logout" class="more_setting_btn">로그아웃</div>
@@ -52,7 +52,7 @@ export default {
         this.name = response.data.data.member.name
         this.email = response.data.data.member.email
         this.phone = response.data.data.member.phone
-        this.birth = response.data.data.member.birth_year
+        this.birth = response.data.data.member.birth_year + "년생"
         axios.get(`${this.url}/school/${response.data.data.member.school_id}`)
         .then(response => {
           if (response.data.status === 200) {
