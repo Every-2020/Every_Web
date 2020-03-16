@@ -87,7 +87,7 @@ export default {
       }
     },
     forgot () {
-      this.$swal('오류','현재 개발 중입니다.','error')
+      this.$swal('안내','현재 개발 중입니다.','warning')
     }
   },
 }
