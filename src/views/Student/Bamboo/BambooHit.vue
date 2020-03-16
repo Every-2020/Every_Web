@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     close () {
-      this.$router.push({name: 'bamboo'})
+      this.$router.push({name: 'student'})
     },
     postHide (content) {
       if (content.length > 250) {
