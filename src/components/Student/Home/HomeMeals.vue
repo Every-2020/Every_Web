@@ -9,7 +9,7 @@
           <img src="../../../assets/student/home/sunrise.png" alt="sunrise">
           <span>아침</span>
         </div>
-        <div class="home_right_meals_box_content" v-if="meals[0]" v-html="meals[0].meal_name"></div>
+        <div class="home_right_meals_box_content" v-if="meal1" v-html="meal1.meal_name"></div>
         <div class="home_right_meals_box_content" v-else>급식이 없습니다.</div>
         <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave1.png" alt="wave">
       </div>
@@ -18,7 +18,7 @@
           <img src="../../../assets/student/home/sun.png" alt="sunrise">
           <span>점심</span>
         </div>
-        <div class="home_right_meals_box_content" v-if="meals[1]" v-html="meals[1].meal_name"></div>
+        <div class="home_right_meals_box_content" v-if="meal2" v-html="meal2.meal_name"></div>
         <div class="home_right_meals_box_content" v-else>급식이 없습니다.</div>
         <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave2.png" alt="wave">
       </div>
@@ -27,7 +27,7 @@
           <img src="../../../assets/student/home/moon.png" alt="sunrise">
           <span>저녁</span>
         </div>
-        <div class="home_right_meals_box_content" v-if="meals[2]" v-html="meals[2].meal_name"></div>
+        <div class="home_right_meals_box_content" v-if="meal3" v-html="meal3.meal_name"></div>
         <div class="home_right_meals_box_content" v-else>급식이 없습니다.</div>
         <img class="home_right_meals_wave" src="../../../assets/student/home/meals-wave3.png" alt="wave">
         <img class="moon_star" src="../../../assets/student/home/star.png" alt="star">
@@ -47,7 +47,10 @@ export default {
       url: server,
       meals: [],
       noMeals: true,
-      now: 2
+      now: 2,
+      meal1: '',
+      meal2: '',
+      meal3: ''
     }
   },
   mounted() {
@@ -55,6 +58,15 @@ export default {
     .then(response => {
       if (response.data.status === 200) {
         this.meals = response.data.data.meals
+        this.meals.forEach(meal => {
+          if (meal.meal_code === 1) {
+            this.meal1 = meal
+          } else if (meal.meal_code === 2) {
+            this.meal2 = meal
+          } else if (meal.meal_code === 3) {
+            this.meal3 = meal
+          } 
+        });
         this.noMeals = false
       }
     })
@@ -154,6 +166,7 @@ export default {
     display: flex;
     display: -webkit-flex;
     justify-content: space-between;
+    text-align: center;
     @media screen and (max-width: 768px) {
       justify-content: center;
       align-items: center;
