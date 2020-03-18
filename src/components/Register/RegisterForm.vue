@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import sha512 from 'js-sha512'
 import RegisterStudent from '@/components/Register/RegisterStudent.vue'
 import RegisterWorker from '@/components/Register/RegisterWorker.vue'
 import axios from 'axios'
@@ -245,7 +246,7 @@ export default {
     submitStudent () {
       axios.post(`${this.url}/auth/register/student`, {
         email: this.email,
-        pw: this.pw,
+        pw: sha512(this.pw),
         name: this.name,
         phone: this.phone,
         birth_year: this.birth,
@@ -265,7 +266,7 @@ export default {
     submitWorker () {
       axios.post(`${this.url}/auth/register/worker`, {
         email: this.email,
-        pw: this.pw,
+        pw: sha512(this.pw),
         name: this.name,
         phone: this.phone,
         birth_year: this.birth,

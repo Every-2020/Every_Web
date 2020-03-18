@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import sha512 from 'js-sha512'
 import axios from 'axios'
 import server from '@/models/server'
 export default {
@@ -49,7 +50,7 @@ export default {
     onSubmit () {
       axios.post(`${this.url}/auth/login`, {
         email: this.email,
-        pw: this.pw
+        pw: sha512(this.pw)
       })
       .then( response => { 
         if (response.status === 200) {
