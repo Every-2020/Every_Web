@@ -1,5 +1,5 @@
 <template>
-  <div class="post_header">
+  <div @click="onClick" class="post_header">
     <div class="post_header_img">
       <img src="../../../assets/student/bamboo/profile.png" alt="profile">
     </div>
@@ -34,6 +34,11 @@ export default {
     let today = day.getFullYear().toString() + "년 " + (day.getMonth() + 1).toString() + "월 " + day.getDate().toString() + "일"
     
     this.date = today
+  },
+  methods: {
+    onClick () {
+      this.$emit('onPageView', this.idx)
+    }
   },
 }
 </script>

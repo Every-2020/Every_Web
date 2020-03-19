@@ -166,8 +166,9 @@ export default {
         .then(() => {
           this.editing = false
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          this.$swal('오류','로그인 시간이 만료되었습니다.','error')
+        this.$router.push({name: 'login'})
         })
         setTimeout(() => {
           this.$emit('onRefresh')

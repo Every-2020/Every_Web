@@ -3,7 +3,7 @@
     <bamboo-load v-if="load"></bamboo-load>
     <div v-else class="post" v-for="(post, index) in posts" :key="index">
       <div class="post_content">
-        <bamboo-header :created="post.created_at" :time="postTimeCalc(post.created_at)" :idx="post.idx"></bamboo-header>
+        <bamboo-header @onPageView="onPageView" :created="post.created_at" :time="postTimeCalc(post.created_at)" :idx="post.idx"></bamboo-header>
         <div :class="{'post_content_main' : true, 'post_content_main_hidden' : postHide(post.content)}">
           <span class="post_content_main_text" v-html="postLength(post.content)"></span>
           <span class="post_content_main_hide">...</span>
@@ -188,8 +188,9 @@ export default {
       text-align: left;
       margin: 10px 0;
       span {
+        white-space: pre-wrap;
         word-wrap: break-word;
-        // word-break: keep-all;
+        word-break: keep-all;
         -ms-word-wrap: break-word;
       }
       &_more {
