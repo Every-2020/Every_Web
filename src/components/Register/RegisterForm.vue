@@ -252,15 +252,14 @@ export default {
         birth_year: this.birth,
         school_id: this.school_id
       })
-      .then( response => { 
+      .then((response) => { 
         if (response.status === 201) {
           this.$emit('onRegister')
         }
       })
-      .catch( error => {
+      .catch(() => {
         this.$swal('오류','회원가입에 실패하였습니다.','error')
         this.next = 1
-        console.log(error)
       })
     },
     submitWorker () {
@@ -273,15 +272,14 @@ export default {
         work_place: this.place,
         work_category: this.category
       })
-      .then( response => { 
+      .then((response) => { 
         if (response.status === 201) {
           this.$emit('onRegister')
         }
       })
-      .catch( error => {
+      .catch(() => {
         this.$swal('오류','회원가입에 실패하였습니다.','error')
         this.next = 1
-        console.log(error)
       })
     },
     onSelect (id) {

@@ -226,14 +226,15 @@ export default {
         font-size: 14px;
         font-weight: 600;
         line-height: 25px;
-        height: 140px;
-        overflow-y: scroll;
+        height: calc(100% - 30px);
+        overflow: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
         display: flex;
         display: -webkit-flex;
         justify-content: center;
-        align-items: center;
+        width: 100%;
+        word-break: break-all;
         @media screen and (min-width: 769px) {
           font-size: 15px;
         }

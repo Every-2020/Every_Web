@@ -31,7 +31,7 @@ const routes = [
         }
         return next({name: 'worker'});
       } else {
-        return next('/login');
+        return next({name: 'login'});
       }
     },
   },
@@ -46,7 +46,7 @@ const routes = [
         }
         return next();
       } else {
-        return next('/login');
+        return next({name: 'login'});
       }
     },
     children: [
@@ -71,7 +71,7 @@ const routes = [
         }
         return next({name: 'worker'});
       } else {
-        return next('/login');
+        return next({name: 'login'});
       }
     },
     children: [
@@ -154,7 +154,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes,
 })
 
