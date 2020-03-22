@@ -9,10 +9,15 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: 'Every - 학교 생활을 편리화시키다.' },
+      { name: 'keywords', content: 'Every, 에브리, 대나무숲, 학교, 학생, 직장인, 편리화, 대구소프트웨어고등학교, 학생 커뮤니티' },
+      { property: 'og:image', content: '/favicon.ico' },
+      { property: 'og:content', content: 'Every - 학교 생활을 편리화시키다.' },
+      { property: 'og:title', content: 'Evey - 에브리' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'canonical', href: 'http://everykr.com' }
     ],
     script: [
       { src: 'https://kit.fontawesome.com/e80abcedf4.js', crossorigin: 'anonymous' }
