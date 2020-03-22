@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     toSchedule () {
-      this.$router.push({ name: 'schedule' })
+      this.$router.push({ name: 'student-schedule' })
     }
   }
 }

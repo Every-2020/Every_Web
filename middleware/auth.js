@@ -7,7 +7,6 @@ export default function ({ store, route, next }) {
   }
   if (route.matched[0].path === '/student' || route.matched[0].path === '/worker' || route.name === 'index') {
     if (!VueCookie.get('access')) {
-      console.log('a')
       return next({ name: 'login' })
     }
   }

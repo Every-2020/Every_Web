@@ -144,10 +144,10 @@ export default {
   }
   button {
     flex-grow: 1;
-    background: linear-gradient(to right, #8A51FF, #6824F6) no-repeat;
-    background: -o-linear-gradient(to right, #8A51FF, #6824F6) no-repeat;
-    background: -moz-linear-gradient(to right, #8A51FF, #6824F6) no-repeat;
-    background: -webkit-linear-gradient(to right, #8A51FF, #6824F6) no-repeat;
+    background: linear-gradient(0deg, #8A51FF, #6824F6) no-repeat;
+    background: -o-linear-gradient(0deg, #8A51FF, #6824F6) no-repeat;
+    background: -moz-linear-gradient(0deg, #8A51FF, #6824F6) no-repeat;
+    background: -webkit-linear-gradient(0deg, #8A51FF, #6824F6) no-repeat;
     color: white;
     border: none;
     height: 43px;
