@@ -199,7 +199,14 @@ export default {
       this.date = this.today
     },
     onClick (day) {
-      const Day = new Date(this.selectedYear + this.selectedMonthName + day)
+      let month = this.selectedMonth
+      if (this.selectedMonth < 10) {
+        month = '0' + month
+      }
+      if (day < 10) {
+        day = '0' + day
+      }
+      const Day = new Date(this.selectedYear + '-' + month + '-' + day)
       this.$emit('onClick', Day)
       this.today = Day
     }

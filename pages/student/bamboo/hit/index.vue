@@ -2,7 +2,7 @@
   <div class="page_bamboo">
     <div class="page_box">
       <div class="page_box_content">
-        <page-header :item="item" @onClose="close" />
+        <hit-header :item="item" @onClose="close" />
         <page-main :item="item.content" />
       </div>
       <div class="page_box_comment">
@@ -17,12 +17,12 @@
 import axios from 'axios'
 import CommentAdd from '~/components/Student/Bamboo/Hit/HitCommentAdd'
 import Comment from '~/components/Student/Bamboo/Hit/HitComment'
-import PageHeader from '~/components/Student/Bamboo/Page/PageHeader'
+import HitHeader from '~/components/Student/Bamboo/Hit/HitHeader'
 import PageMain from '~/components/Student/Bamboo/Page/PageMain'
 export default {
   name: 'BambooHit',
   components: {
-    PageHeader,
+    HitHeader,
     PageMain,
     Comment,
     CommentAdd
@@ -90,7 +90,7 @@ export default {
         })
     },
     close () {
-      this.$router.push({ name: 'student-bamboo' })
+      this.$router.push({ name: 'student' })
     },
     postHide (content) {
       if (content.length > 250) {

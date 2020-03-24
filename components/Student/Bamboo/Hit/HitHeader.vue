@@ -1,20 +1,16 @@
 <template>
-  <div class="page_header">
+  <div class="hit_header">
     <img class="back" src="~/assets/back.png" alt="back" @click="close">
-    <div class="page_header_profile">
+    <div class="hit_header_profile">
       <img src="~/assets/student/bamboo/profile.png" alt="profile" class="profile">
-      <div class="page_header_items">
-        <div class="page_header_title">
+      <div class="hit_header_items">
+        <div class="hit_header_title">
           <span v-if="item.idx">#{{ item.idx }}번째 이야기</span>
           <span v-else>불러오는 중</span>
         </div>
-        <div class="page_header_date">
-          <span v-if="item.created_at" :title="item.created_at.substring(0, 19)">{{ getDate(item.created_at) }}</span>
-          <span v-else>불러오는 중</span>
-        </div>
-        <div class="page_header_time">
-          <span v-if="item.created_at">{{ postTimeCalc(item.created_at) }}</span>
-          <span v-else>불러오는 중</span>
+        <div class="hit_header_date">
+          <span v-if="item.created_at" :title="item.created_at.substring(0, 19)">★ 오늘의 인기 게시글</span>
+          <span v-else>★ 오늘의 인기 게시글</span>
         </div>
       </div>
     </div>
@@ -23,7 +19,7 @@
 
 <script>
 export default {
-  name: 'PageHeader',
+  name: 'HitHeader',
   props: {
     item: {
       type: Object,
@@ -75,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-.page_header {
+.hit_header {
   width: 100%;
   height: 70px;
   text-align: left;
@@ -121,17 +117,21 @@ export default {
     }
   }
   &_date {
-    font-size: 16px;
+    margin-top: 3px;
     span {
       cursor: pointer;
-      &:hover {
-        text-decoration: underline;
+      font-size: 13px;
+      border: 1.7px solid #FFC400;
+      color: #FFC400;
+      font-weight: 800;
+      border-radius: 14px;
+      text-align: center;
+      padding: 3px 10px;
+      @media screen and (max-width: 450px) {
+        border: 1.3px solid #FFC400;
+        font-size: 12px;
       }
     }
-  }
-  &_time {
-    font-size: 15px;
-    font-weight: 700;
   }
   &_profile {
     display: flex;

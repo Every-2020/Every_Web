@@ -2,6 +2,7 @@ import axios from 'axios'
 import VueCookie from 'vue-cookie'
 
 export default function ({ store, route, next }) {
+  VueCookie.delete('bamboo')
   if (store.state.access) {
     axios.defaults.headers.common.token = store.state.access
   }

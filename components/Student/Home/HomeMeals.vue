@@ -6,7 +6,7 @@
         <img src="~/assets/student/home/sunrise.png" alt="sunrise">
         <span>아침</span>
       </div>
-      <div v-if="meal1" class="home_meals_box_content" v-html="meal1.meal_name" />
+      <div v-if="meal1" class="home_meals_box_content" v-html="getMeal(meal1.meal_name)" />
       <div v-else class="home_meals_box_content">
         급식이 없습니다.
       </div>
@@ -17,7 +17,7 @@
         <img src="~/assets/student/home/sun.png" alt="sunrise">
         <span>점심</span>
       </div>
-      <div v-if="meal2" class="home_meals_box_content" v-html="meal2.meal_name" />
+      <div v-if="meal2" class="home_meals_box_content" v-html="getMeal(meal2.meal_name)" />
       <div v-else class="home_meals_box_content">
         급식이 없습니다.
       </div>
@@ -28,7 +28,7 @@
         <img src="~/assets/student/home/moon.png" alt="sunrise">
         <span>저녁</span>
       </div>
-      <div v-if="meal3" class="home_meals_box_content" v-html="meal3.meal_name" />
+      <div v-if="meal3" class="home_meals_box_content" v-html="getMeal(meal3.meal_name)" />
       <div v-else class="home_meals_box_content">
         급식이 없습니다.
       </div>
@@ -100,6 +100,9 @@ export default {
           document.getElementsByClassName('home_meals_right')[0].classList.add('ob')
         }
       }
+    },
+    getMeal (meal) {
+      return meal
     }
   }
 }

@@ -81,9 +81,8 @@ export default {
       this.filteredEvent = []
       this.eventList.forEach((event) => {
         const select = this.selected.getTime()
-        let start = new Date(event.start_date + ' 00:00:00.000')
-        let end = new Date(event.end_date + ' 23:59:59.000')
-
+        let start = new Date(parseInt(event.start_date.substring(0, 4)), parseInt(event.start_date.substring(5, 7)) - 1, parseInt(event.start_date.substring(8, 10)), 0, 0, 0)
+        let end = new Date(parseInt(event.end_date.substring(0, 4)), parseInt(event.end_date.substring(5, 7)) - 1, parseInt(event.end_date.substring(8, 10)), 23, 59, 59)
         start = start.getTime()
         end = end.getTime()
         if (select >= start && select < end) {

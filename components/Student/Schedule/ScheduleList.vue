@@ -245,7 +245,7 @@ export default {
     display: -webkit-flex;
     justify-content: center;
     text-align: left;
-    padding: 20px;
+    padding-left: 20px;
     position: relative;
     @media screen and (max-width: 980px) {
       max-width: 450px;

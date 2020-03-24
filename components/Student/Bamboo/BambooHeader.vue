@@ -39,7 +39,14 @@ export default {
     }
   },
   mounted () {
-    const day = new Date(this.created)
+    const day = new Date(
+      parseInt(this.created.substring(0, 4)),
+      parseInt(this.created.substring(5, 7)) - 1,
+      parseInt(this.created.substring(8, 10)),
+      parseInt(this.created.substring(11, 13)),
+      parseInt(this.created.substring(14, 16)),
+      parseInt(this.created.substring(18, 20))
+    )
     const today = day.getFullYear().toString() + '년 ' + (day.getMonth() + 1).toString() + '월 ' + day.getDate().toString() + '일'
     this.date = today
   },

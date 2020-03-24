@@ -55,25 +55,6 @@ export default {
     close () {
       this.$router.push({ name: 'student-bamboo' })
     },
-    postHide (content) {
-      if (content.length > 250) {
-        return true
-      } else {
-        return false
-      }
-    },
-    postLength (content) {
-      if (content.length > 250) {
-        return content.substring(0, 250).replace(/(?:\r\n|\r|\n)/g, '<br />')
-      }
-      return content
-    },
-    postSeeMore (idx) {
-      document.getElementsByClassName('page_box_content_main')[idx].classList.remove('page_box_content_main_hidden')
-    },
-    postSplit (content) {
-      return content.substring(250).replace(/(?:\r\n|\r|\n)/g, '<br />')
-    },
     refreshComment () {
       this.refresh += 1
     }

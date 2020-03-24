@@ -51,6 +51,7 @@ export default {
   &_wave {
     position: fixed;
     width: 100%;
+    z-index: -1;
     bottom: 0;
     left: 0;
   }

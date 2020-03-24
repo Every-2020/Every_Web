@@ -76,21 +76,26 @@ export default {
       }
     },
     postTimeCalc (time) {
-      const created = new Date(time)
+      const created = new Date(
+        parseInt(time.substring(0, 4)),
+        parseInt(time.substring(5, 7)) - 1,
+        parseInt(time.substring(8, 10)),
+        parseInt(time.substring(11, 13)),
+        parseInt(time.substring(14, 16)),
+        parseInt(time.substring(18, 20))
+      )
       const date = new Date()
-      const dateGab = date - created
-      if (dateGab < 1000) {
+      const dateGab = (parseInt(date.getTime() - created.getTime()) / 1000)
+      if (dateGab < 60) {
         return '방금'
-      } else if (dateGab < 60000) {
-        return parseInt(dateGab / 1000) + '초'
-      } else if (dateGab < 3600000) {
-        return parseInt(dateGab / 60000) + '분'
-      } else if (dateGab < 86400000) {
-        return parseInt(dateGab / 3600000) + '시간'
-      } else if (dateGab < 604800000) {
-        return parseInt(dateGab / 86400000) + '일'
+      } else if (dateGab < 3600) {
+        return parseInt(dateGab / 60) + '분'
+      } else if (dateGab < 86400) {
+        return parseInt(dateGab / 3600) + '시간'
+      } else if (dateGab < 604800) {
+        return parseInt(dateGab / 86400) + '일'
       } else {
-        return parseInt(dateGab / 604800000) + '주'
+        return parseInt(dateGab / 604800) + '주'
       }
     }
   }
