@@ -11,17 +11,20 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Every - 학교 생활을 편리화시키다.' },
       { name: 'keywords', content: 'Every, 에브리, 대나무숲, 학교, 학생, 직장인, 편리화, 대구소프트웨어고등학교, 학생 커뮤니티' },
-      { property: 'og:image', content: '/favicon.ico' },
-      { property: 'og:content', content: 'Every - 학교 생활을 편리화시키다.' },
+      { property: 'og:image', content: 'http://everykr.com/search_image.png' },
+      { property: 'og:description', content: 'Every - 학교 생활을 편리화시키다.' },
       { property: 'og:title', content: 'Evey - 에브리' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'canonical', href: 'http://everykr.com' }
-    ],
-    script: [
-      { src: 'https://kit.fontawesome.com/e80abcedf4.js', crossorigin: 'anonymous' }
+      { rel: 'canonical', href: 'http://everykr.com' },
+      { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareEB.woff' },
+      { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareB.woff' },
+      { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareR.woff' }
     ]
+    // script: [
+    //   { src: 'https://kit.fontawesome.com/e80abcedf4.js', crossorigin: 'anonymous' }
+    // ]
   },
   router: {
     middleware: [ 'auth', 'identity' ]
@@ -41,6 +44,7 @@ export default {
   plugins: [
     '~/plugins/vue-sweetalert2.js',
     '~/plugins/vue-cookie.js',
+    '~/plugins/fontawesome.js',
     { src: '~/plugins/vuejs-datepicker', ssr: false }
   ],
   /*
