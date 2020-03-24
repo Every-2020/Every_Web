@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login_box">
-      <i ref="i" class="fas fa-exchange-alt" @click="change" />
+      <font-awesome-icon ref="i" :icon="['fas', 'exchange-alt']" @click="change" />
       <login-left />
       <login-right />
     </div>
@@ -21,11 +21,11 @@ export default {
     change () {
       this.$refs.i.classList.toggle('active')
       if (this.$refs.i.classList.contains('active')) {
-        document.getElementsByTagName('i')[0].style.color = 'var(--text-color-white)'
+        document.getElementsByTagName('svg')[0].style.color = 'var(--text-color-white)'
         document.getElementsByClassName('login_left')[0].style.display = 'flex'
         document.getElementsByClassName('login_right')[0].style.display = 'none'
       } else {
-        document.getElementsByTagName('i')[0].style.color = 'var(--main-color-box-login)'
+        document.getElementsByTagName('svg')[0].style.color = 'var(--main-color-box-login)'
         document.getElementsByClassName('login_left')[0].style.display = 'none'
         document.getElementsByClassName('login_right')[0].style.display = 'flex'
       }
@@ -33,7 +33,7 @@ export default {
   },
   head () {
     return {
-      title: 'Every - 로그인'
+      title: 'Every'
     }
   }
 }
@@ -53,7 +53,7 @@ export default {
   @media screen and (max-width: 350px) {
     padding: 0 5px;
   }
-  i {
+  svg {
     z-index: 1;
     position: absolute;
     right: 30px;
