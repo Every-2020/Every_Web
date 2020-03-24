@@ -4,6 +4,18 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted () {
+    const agent = navigator.userAgent.toLowerCase()
+    if ((navigator.appName === 'Netscape' && navigator.userAgent.search('Trident') !== -1) || (agent.search('msie') !== -1)) {
+      alert('본 페이지는 Internet Explor를 지원하지 않습니다. Chrome을 설치해주세요.')
+      self.close()
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import url('~/assets/style/common.scss');
 #__layout {
