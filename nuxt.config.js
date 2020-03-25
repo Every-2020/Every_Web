@@ -22,9 +22,6 @@ export default {
       { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareB.woff' },
       { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareR.woff' }
     ]
-    // script: [
-    //   { src: 'https://kit.fontawesome.com/e80abcedf4.js', crossorigin: 'anonymous' }
-    // ]
   },
   router: {
     middleware: [ 'auth', 'identity' ]
