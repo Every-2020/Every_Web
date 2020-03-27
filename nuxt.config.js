@@ -17,10 +17,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'canonical', href: 'http://everykr.com' },
-      { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareEB.woff' },
-      { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareB.woff' },
-      { rel: 'preload', as: 'font', crossorigin: 'crossorigin', type: 'font/woff2', href: 'fonts/NanumSquareR.woff' }
+      { rel: 'canonical', href: 'http://everykr.com' }
     ]
   },
   router: {

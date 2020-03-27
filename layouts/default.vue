@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// import FontFaceObserver from 'fontfaceobserver/fontfaceobserver'
 export default {
   mounted () {
     const agent = navigator.userAgent.toLowerCase()
@@ -12,13 +13,26 @@ export default {
       alert('본 페이지는 Internet Explor를 지원하지 않습니다. Chrome을 설치해주세요.')
       self.close()
     }
+    // font load FOUT 최소화
+    // document.documentElement.classList.add('blocking-time')
+    // setTimeout(() => {
+    //   document.documentElement.classList.remove('blocking-time')
+    // }, 400)
+    // const font = new FontFaceObserver('NanumSquare')
+    // font.load(null, 3000).then(() => {
+    //   document.documentElement.classList.add('fonts-loaded')
+    // })
+  },
+  destroyed () {
+    this.$cookie.delete('bamboo')
   }
 }
 </script>
 
 <style lang="scss">
 @import url('~/assets/style/common.scss');
-#__layout {
+
+body {
   font-family: 'NanumSquare', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
