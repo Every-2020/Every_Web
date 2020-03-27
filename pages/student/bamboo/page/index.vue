@@ -38,20 +38,23 @@ export default {
       }
     }
   },
-  mounted () {
-    axios.get(`${this.$store.state.url}/bamboo/post/${this.idx}`)
-      .then((response) => {
-        if (response.data.status === 200) {
-          this.item = response.data.data.post
-          this.load = false
-        }
-      })
-      .catch(() => {
-        this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-        this.$router.push({ name: 'login' })
-      })
+  async mounted () {
+    await this.getPost()
+    this.load = false
   },
   methods: {
+    getPost () {
+      axios.get(`${this.$store.state.url}/bamboo/post/${this.idx}`)
+        .then((response) => {
+          if (response.data.status === 200) {
+            this.item = response.data.data.post
+          }
+        })
+        .catch(() => {
+          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
+          this.$router.push({ name: 'login' })
+        })
+    },
     close () {
       this.$router.push({ name: 'student-bamboo' })
     },

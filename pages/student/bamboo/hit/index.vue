@@ -49,12 +49,10 @@ export default {
       await this.getComment()
       if (this.comments.length) {
         await this.getUsers()
-        setTimeout(() => {
-          this.loading = false
-        }, 300)
-      } else {
-        this.loading = false
       }
+      setTimeout(() => {
+        this.loading = false
+      }, 300)
     },
     getPost () {
       return axios.get(`${this.$store.state.url}/bamboo/post?order=hit`)

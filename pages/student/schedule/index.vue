@@ -52,31 +52,35 @@ export default {
     }
   },
   mounted () {
+    // Nav Image Color
     document.getElementsByClassName('router_home')[0].classList.remove('active_home')
     document.getElementsByClassName('router_more')[0].classList.remove('active_more')
     document.getElementsByClassName('router_bamboo')[0].classList.remove('active_bamboo')
     document.getElementsByClassName('router_schedule')[0].classList.add('active_schedule')
-    axios.get(`${this.$store.state.url}/schedule`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          this.eventList = res.data.data.schedules
-          for (const event of this.eventList) {
-            this.events.push({
-              categoryId: 1,
-              start: event.start_date,
-              end: event.end_date,
-              title: event.title
-            })
-          }
-          this.dayPick(new Date())
-        }
-      })
-      .catch(() => {
-        this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-        this.$router.push({ name: 'login' })
-      })
+    this.getEvents()
   },
   methods: {
+    getEvents () {
+      axios.get(`${this.$store.state.url}/schedule`)
+        .then((res) => {
+          if (res.data.status === 200) {
+            this.eventList = res.data.data.schedules
+            for (const event of this.eventList) {
+              this.events.push({
+                categoryId: 1,
+                start: event.start_date,
+                end: event.end_date,
+                title: event.title
+              })
+            }
+            this.dayPick(new Date())
+          }
+        })
+        .catch(() => {
+          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
+          this.$router.push({ name: 'login' })
+        })
+    },
     getThis () {
       this.filteredEvent = []
       this.eventList.forEach((event) => {
@@ -103,26 +107,7 @@ export default {
       this.selectedDay = day.getFullYear() + '-' + month + '-' + date
     },
     refresh () {
-      axios.get(`${this.$store.state.url}/schedule`)
-        .then((res) => {
-          if (res.data.status === 200) {
-            this.eventList = res.data.data.schedules
-            this.events = []
-            for (const event of this.eventList) {
-              this.events.push({
-                categoryId: 1,
-                start: event.start_date,
-                end: event.end_date,
-                title: event.title
-              })
-            }
-            this.getThis()
-          }
-        })
-        .catch(() => {
-          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-          this.$router.push({ name: 'login' })
-        })
+      this.getEvents()
     }
   }
 }

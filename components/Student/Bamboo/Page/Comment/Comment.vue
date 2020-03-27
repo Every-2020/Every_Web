@@ -58,12 +58,8 @@ export default {
       await this.getComment()
       if (this.comments.length) {
         await this.getUsers()
-        setTimeout(() => {
-          this.loading = false
-        }, 300)
-      } else {
-        this.loading = false
       }
+      this.loading = false
     },
     getComment () {
       return axios.get(`${this.$store.state.url}/bamboo/reply?post=${this.idx}`)
@@ -90,18 +86,21 @@ export default {
       this.edit_content = comment.content
       this.edit_name = comment.user
     },
-    onEdit (edit) {
-      if (edit.replace(/\s+$/, '') !== '') {
-        axios.put(`${this.$store.state.url}/bamboo/reply/${this.more_idx}`, {
-          content: edit
+    editComment (edit) {
+      axios.put(`${this.$store.state.url}/bamboo/reply/${this.more_idx}`, {
+        content: edit
+      })
+        .then(() => {
+          this.editing = false
         })
-          .then(() => {
-            this.editing = false
-          })
-          .catch(() => {
-            this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-            this.$router.push({ name: 'login' })
-          })
+        .catch(() => {
+          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
+          this.$router.push({ name: 'login' })
+        })
+    },
+    async onEdit (edit) {
+      if (edit.replace(/\s+$/, '') !== '') {
+        await this.editComment(edit)
         setTimeout(() => {
           this.$emit('onRefresh')
         }, 200)

@@ -37,7 +37,8 @@ export default {
       email: '불러오는 중',
       phone: '불러오는 중',
       school: '불러오는 중',
-      birth: '불러오는 중'
+      birth: '불러오는 중',
+      school_id: 0
     }
   },
   computed: {
@@ -45,32 +46,41 @@ export default {
       return parseInt(this.$cookie.get('idx'))
     }
   },
-  mounted () {
-    axios.get(`${this.$store.state.url}/member/student/${this.idx}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          this.name = res.data.data.member.name
-          this.email = res.data.data.member.email
-          this.phone = res.data.data.member.phone
-          this.birth = res.data.data.member.birth_year + '년생'
-          axios.get(`${this.$store.state.url}/school/${res.data.data.member.school_id}`)
-            .then((res) => {
-              if (res.data.status === 200) {
-                this.school = res.data.data.school.school_name
-              }
-            })
-            .catch(() => {
-              this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-              this.$router.push({ name: 'login' })
-            })
-        }
-      })
-      .catch(() => {
-        this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-        this.$router.push({ name: 'login' })
-      })
+  async mounted () {
+    await this.getInfo()
+    setTimeout(() => {
+      this.getSchool()
+    }, 100)
   },
   methods: {
+    getInfo () {
+      axios.get(`${this.$store.state.url}/member/student/${this.idx}`)
+        .then((res) => {
+          if (res.data.status === 200) {
+            this.name = res.data.data.member.name
+            this.email = res.data.data.member.email
+            this.phone = res.data.data.member.phone
+            this.birth = res.data.data.member.birth_year + '년생'
+            this.school_id = res.data.data.member.school_id
+          }
+        })
+        .catch(() => {
+          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
+          this.$router.push({ name: 'login' })
+        })
+    },
+    getSchool () {
+      axios.get(`${this.$store.state.url}/school/${this.school_id}`)
+        .then((res) => {
+          if (res.data.status === 200) {
+            this.school = res.data.data.school.school_name
+          }
+        })
+        .catch(() => {
+          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
+          this.$router.push({ name: 'login' })
+        })
+    },
     back () {
       this.$router.push({ name: 'student-more' })
     },

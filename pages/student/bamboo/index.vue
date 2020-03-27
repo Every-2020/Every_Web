@@ -40,23 +40,26 @@ export default {
       load: true
     }
   },
-  mounted () {
-    axios.get(`${this.$store.state.url}/bamboo/post`)
-      .then((res) => {
-        if (res.status === 200) {
-          this.posts = res.data.data.posts
-          this.load = false
-        }
-      })
-      .catch(() => {
-        this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-        this.$router.push({ name: 'login' })
-      })
+  async mounted () {
+    await this.getPosts()
+    this.load = false
     setTimeout(() => {
       window.scrollTo(0, this.$cookie.get('bamboo'))
     }, 100)
   },
   methods: {
+    getPosts () {
+      axios.get(`${this.$store.state.url}/bamboo/post`)
+        .then((res) => {
+          if (res.status === 200) {
+            this.posts = res.data.data.posts
+          }
+        })
+        .catch(() => {
+          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
+          this.$router.push({ name: 'login' })
+        })
+    },
     postTimeCalc (time) {
       const created = new Date(
         parseInt(time.substring(0, 4)),
@@ -90,21 +93,12 @@ export default {
     close () {
       this.add = false
     },
-    refresh () {
+    async refresh () {
       this.add = false
-      this.$cookie.delete('bamboo')
       this.load = true
-      axios.get(`${this.$store.state.url}/bamboo/post`)
-        .then((res) => {
-          if (res.status === 200) {
-            this.posts = res.data.data.posts
-            this.load = false
-          }
-        })
-        .catch(() => {
-          this.$swal('오류', '로그인 시간이 만료되었습니다.', 'error')
-          this.$router.push({ name: 'login' })
-        })
+      this.posts = []
+      await this.getPosts()
+      this.load = false
     }
   },
   head () {
