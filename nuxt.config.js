@@ -21,7 +21,7 @@ export default {
     ]
   },
   router: {
-    middleware: [ 'auth', 'identity' ]
+    middleware: ['auth', 'identity']
   },
   /*
   ** Customize the progress-bar color

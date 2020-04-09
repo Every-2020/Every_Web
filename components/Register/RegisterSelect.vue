@@ -1,5 +1,5 @@
 <template>
-  <div class="select">
+  <div class="selecter">
     <div class="select_header">
       <img class="select_back" src="../../assets/register/back.png" @click="$router.push({ name: 'login' })">
       <div>
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-.select {
+.selecter {
   display: flex;
   display: -webkit-flex;
   position: relative;
@@ -63,6 +63,8 @@ export default {
     min-height: 560px;
     max-height: 560px;
   }
+}
+.select {
   &_header {
     text-align: left;
     margin-bottom: 40px;
