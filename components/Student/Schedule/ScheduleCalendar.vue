@@ -47,7 +47,7 @@
               weekday-${day.getDay()}`,
               offDays.includes(day.getDay()) ? 'off-day' : null,
               day.toDateString() === today.toDateString() ? 'today' : null,
-              day.toDateString() === select.toDateString() ? 'select' : null
+              day.toDateString() === select.toDateString() ? 'selected' : null
             ]"
             :style="generateDayStyle(day)"
             @click="onClick(day.getDate())"
@@ -351,7 +351,7 @@ export default {
     }
   }
 }
-.select {
+.selected {
   background-color: rgb(214, 64, 64) !important;
   color: white !important;
 }
