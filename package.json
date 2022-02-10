@@ -18,7 +18,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/style-resources": "^1.0.0",
     "js-sha512": "^0.8.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nuxt": "^2.0.0",
     "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
